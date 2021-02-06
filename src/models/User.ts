@@ -12,6 +12,9 @@ interface userAtrr {
   password: string;
   firstname: string;
   lastname: string;
+  token:string
+  role?:Role
+  paymentRef?: string;
   emailVerified?:boolean
 }
 
@@ -22,11 +25,12 @@ interface userDoc extends Document {
   lastname: string;
   role:Role
   emailVerified:boolean
+  token:string
   isPasswordCorrect(input: string): Promise<Boolean>;
 }
 
 interface userModel extends Model<userDoc> {
-  build(attr: userDoc): userDoc;
+  build(attr: userAtrr): userDoc;
 }
 
 const userSchma = new Mongoose.Schema(
@@ -50,6 +54,9 @@ const userSchma = new Mongoose.Schema(
     emailVerified:{
       type:Boolean,
       default:false
+    },
+    token:{
+     type:String
     },
     role: {
       type: String,

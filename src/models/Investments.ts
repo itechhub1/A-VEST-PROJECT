@@ -1,5 +1,6 @@
 import mongoose, { Model, Document } from "mongoose";
 import { InvesmentStatus, Role } from "../util";
+import {Moment} from 'moment'
 
 interface investmentAtrr {
   fullname: string;
@@ -7,21 +8,25 @@ interface investmentAtrr {
   phonenumber: string;
   identity: string;
   plan: string;
-  duration: string;
+  monthsLeft?:string
   percentage: string;
-  amount: string;
-  roi: string;
+  amount: number;
+  roi: number;
   employerCompany: string;
   occupationDesc: string;
-  nameOfKin: string;
+  nextOfKin: string;
   addressOfKin: string;
   relationshipOfKin: string;
   phonenumberOfKin: string;
   agreement: boolean;
   paymentPlan: string;
-  status?: boolean;
+  status?: InvesmentStatus;
   payment?: boolean;
   paymentRef?: string;
+  termination?: boolean;
+  investementExpired?: boolean;
+  expireTime:string
+  userId?:string
 }
 
 interface investmentDoc extends Document {
@@ -30,25 +35,29 @@ interface investmentDoc extends Document {
   phonenumber: string;
   identity: string;
   plan: string;
-  duration: string;
+  monthsLeft?:string
   percentage: string;
-  amount: string;
-  roi: string;
+  amount: number;
+  roi: number;
   employerCompany: string;
   occupationDesc: string;
-  nameOfKin: string;
+  nextOfKin: string;
   addressOfKin: string;
   relationshipOfKin: string;
   phonenumberOfKin: string;
   agreement: boolean;
   paymentPlan: string;
-  status?: string;
+  status?: InvesmentStatus;
   payment?: boolean;
   paymentRef?: string;
+  termination?: boolean;
+  investementExpired?: boolean;
+  expireTime:string
+  userId:string
 }
 
 interface investmentModel extends Model<investmentDoc> {
-  build(attr: investmentAtrr): investmentAtrr;
+  build(attr: investmentAtrr): investmentDoc;
 }
 
 const invesmentSchema = new mongoose.Schema(
@@ -73,20 +82,17 @@ const invesmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    duration: {
-      type: String,
-      required: true,
-    },
+  
     percentage: {
       type: String,
       required: true,
     },
     amount: {
-      type: String,
+      type: Number,
       required: true,
     },
     roi: {
-      type: String,
+      type: Number,
       required: true,
     },
     employerCompany: {
@@ -97,7 +103,7 @@ const invesmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    nameOfKin: {
+    nextOfKin: {
       type: String,
       required: true,
     },
@@ -129,12 +135,25 @@ const invesmentSchema = new mongoose.Schema(
     paymentRef: {
       type: String,
     },
-
+    termination: {
+      type: Boolean,
+      default: false,
+    },
+    investementExpired:{
+      type:Boolean,
+      default:false
+    },
+    expireTime:{
+      type:String
+    },
     agreement: {
-      type: String,
+      type: Boolean,
       required: true,
     },
-    user: {
+    monthsLeft:{
+    type:String
+    },
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },

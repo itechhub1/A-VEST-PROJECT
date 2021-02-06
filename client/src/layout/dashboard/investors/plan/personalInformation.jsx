@@ -2,6 +2,7 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { renderFeild } from "../../../../components/inputFeild";
 import { identification } from "../../../../constant";
+import liphonenumber from "libphonenumber-js";
 
 const renderOptionFeild = ({ input, meta }) => {
   //if (!data) return;
@@ -100,11 +101,21 @@ const personalInformation = ({ nextPage, prevPage, handleSubmit }) => {
   );
 };
 
-const validate = ({ identity }) => {
+const validate = ({ identity, phonenumber }) => {
+  let isPhoneNumber
+ if ( typeof phonenumber === 'string') {
+     isPhoneNumber = liphonenumber(phonenumber, "NG");
+ 
+ }
+
   const error = {};
   if (!identity) {
     error.identity = "means of identification cannot be empty";
   }
+
+  if (isPhoneNumber=== undefined || !isPhoneNumber.isValid()) {
+    (error.phonenumber = "input must be a valid phone number"); 
+  } 
   return error;
 };
 

@@ -18,7 +18,7 @@ const PlanDetails = ({
 
   const { id } = parse(window.location.search);
   const renderOptionFeild = ({ input, meta }) => {
-    if(!id) return null
+    if (!id) return null;
     const data = plans.find((pl) => pl.id === parseInt(id));
 
     //if (!data) return;
@@ -26,6 +26,7 @@ const PlanDetails = ({
       <div className="">
         <p className="font-bold text-sm mb-2 ml-1">Pick an investment plan</p>
         <select
+           
           {...input}
           className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
         >
@@ -33,8 +34,11 @@ const PlanDetails = ({
             --- select a plan --
           </option>
           {data.duration.map((_) => {
-            change('duration',_.data)
-           return <option value={_.percent}>{_.data}</option>;
+            return (
+              <option  value={_.data}>
+                {_.data}
+              </option>
+            );
           })}
         </select>
 
@@ -47,8 +51,9 @@ const PlanDetails = ({
     );
   };
 
+
+  /*manipulating investment data slsected by invexstor while prefil the redux-form */
   const getInvestmentDetails = () => {
-    if(!id) return null
     return plans.find(
       (inv) =>
         inv.id === parseInt(id) && (
@@ -62,8 +67,11 @@ const PlanDetails = ({
 
   const calculateROI = (investData) => {
     if (investData) {
+      if(! investData.percentage)return
+      const extractedPercentage = investData.percentage.split(" ")[0].split('%')[0]
+     
       let percentROI =
-        (investData.percentage / 100) * parseInt(investData.amount);
+        (extractedPercentage / 100) * parseInt(investData.amount);
       percentROI = percentROI + parseInt(investData.amount);
       if (isNaN(percentROI)) return;
       return change(
@@ -81,7 +89,6 @@ const PlanDetails = ({
   }, [investData]);
 
   const submit = (formValues) => {
-   
     console.log("amount", formValues.amount);
     const inrange =
       formValues.amount >= parseInt(invest.min) &&
@@ -117,6 +124,7 @@ const PlanDetails = ({
             />
             <Field
               component={renderOptionFeild}
+            
               name="percentage"
               label="Duration"
             />{" "}
@@ -164,7 +172,7 @@ const PlanDetails = ({
 
               <button
                 className="bg-blue-800 text-white p-2 px-8 inline-flex ml-2 rounded-lg"
-               onSubmit="submit"
+                onSubmit="submit"
               >
                 Next
                 <svg

@@ -1,7 +1,7 @@
 import Mongoose, { Model, Document } from "mongoose";
 
 interface userAtrr {
-  _id: Mongoose.Schema.Types.ObjectId;
+  _id: string;
   relationship: string;
   phonenumber: string;
   dob: string;
@@ -9,22 +9,21 @@ interface userAtrr {
 }
 
 interface userDoc extends Document {
-  _id: Mongoose.Schema.Types.ObjectId;
+  _id: string;
   relationship: string;
   phonenumber: string;
   dob: string;
   nationality: string;
-  isPasswordCorrect(input: string): Promise<Boolean>;
 }
 
 interface userModel extends Model<userDoc> {
-  build(attr: userDoc): userDoc;
+  build(attr: userAtrr): userDoc;
 }
 
-const userSchma = new Mongoose.Schema(
+const profileSchma = new Mongoose.Schema(
   {
     _id: {
-      type: Mongoose.Schema.Types.ObjectId,
+      type: String,
       required: true,
     },
     phonenumber: {
@@ -35,11 +34,11 @@ const userSchma = new Mongoose.Schema(
       type: String,
       required: true,
     },
-    email: {
+    relationship: {
       type: String,
       required: true,
     },
-    password: {
+    nationality: {
       type: String,
       required: true,
     },
@@ -49,9 +48,9 @@ const userSchma = new Mongoose.Schema(
   }
 );
 
-userSchma.statics.build = (attr: userAtrr) => {
+profileSchma.statics.build = (attr: userAtrr) => {
   return new profile(attr);
 };
 
-const profile = Mongoose.model<userDoc, userModel>("profile", userSchma);
+const profile = Mongoose.model<userDoc, userModel>("profile", profileSchma);
 export { profile };

@@ -5,10 +5,10 @@ import nodemailer from "nodemailer";
 import sendgridTransport from "nodemailer-sendgrid-transport";
 import { ServerResponse } from "@localmarket/common";
 
-const keys = require("../../../config/keys");
+const keys = require("../../config/keys");
 
 import { randomBytes } from "crypto";
-import { verifyEmailTemplate } from "../../template/verificationTemplate";
+import { emailVerify } from "../../template";
 
 import { body } from "express-validator";
 import { BadRequestError, ValidationResult } from "@localmarket/common";
@@ -23,30 +23,22 @@ const transporter = nodemailer.createTransport(
   })
 );
 
+interface bodyRequest extends Request {
+  body: { [keys: string]: string | undefined };
+}
+
 router.post(
   "/api/user/new",
   [
     body("email").isEmail().withMessage("email address is not valid"),
-    body("username")
-      .not()
-      .isEmpty()
-      .withMessage("username feild cannot be empty"),
     body("firstname")
       .not()
       .isEmpty()
       .withMessage("firstname feild cannot be empty"),
-    body("telephone")
-      .not()
-      .isEmpty()
-      .withMessage("telephone feild cannot be empty"),
     body("lastname")
       .not()
       .isEmpty()
       .withMessage("lastname feild cannot be empty"),
-    body("category")
-      .not()
-      .isEmpty()
-      .withMessage("category feild cannot be empty"),
 
     body("password")
       .trim()
@@ -55,16 +47,7 @@ router.post(
   ],
   ValidationResult,
   async (req: Request, res: Response) => {
-    const {
-      firstname,
-      lastname,
-      category,
-      email,
-      password,
-      username,
-      telephone,
-    } = req.body;
-    console.log(req.body);
+    const { firstname, lastname, email, password } = req.body;
 
     //genrating random string
     const randomString = randomBytes(8).toString("hex");
@@ -74,38 +57,35 @@ router.post(
 
     if (_user) throw new BadRequestError("email has been taken");
 
-    _user = await user.findOne({ username });
-    if (_user) throw new BadRequestError("username has been taken");
-
-    let newUser = user.build({
-      username,
+    const newUser = user.build({
       email,
-      password,
       firstname,
       lastname,
-      telephone,
-      role: category,
-      verifyToken: randomString,
+      password,
+      token: randomString,
     });
+
     await newUser.save();
 
     //sending email verification to client using sendgrid
     return transporter.sendMail(
       {
         to: `${newUser.email}`,
-        from: "williamsadesina@ogunstate.gov.ng",
+        from: "aimartrealtor@gmail.com",
         subject: "Registration Succeeded",
-        html: verifyEmailTemplate(randomString),
+        html: emailVerify(newUser.firstname, newUser.token),
       },
       (err) => {
-        if (!err)
-          return res
-            .status(200)
-            .send(
-              "Account successfully registered: Goto your email to verify your account"
-            );
+        if (!err) console.log(err);
+        //throw new ServerResponse("network failure:Try again later", 500);
+        return res
+          .status(200)
+          .send(
+            "Account successfully created: Activate your account from your email"
+          );
+      
 
-        throw new Error(err?.message);
+        //throw new ServerResponse("network connection failed", 500);
       }
     );
   }
