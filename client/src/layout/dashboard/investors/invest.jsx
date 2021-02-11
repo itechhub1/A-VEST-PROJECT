@@ -1,90 +1,150 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { allInvestment } from "../../../action/investments";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+  Button,
+  ButtonGroup,
+  Paper,
+  TableRow,
+  TableHead,
+  TableContainer,
+  TableCell,
+  TableBody,
+  Table,
+} from "@material-ui/core";
 
-const Invest = () => {
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+
+  root: {
+    background: "linear-gradient(45deg, #1769aa 30%, #2196f3 90%)",
+    color: "white",
+  },
+});
+
+const tableCell = makeStyles({
+  root: {
+    color: "white",
+    fontWeight: "bold",
+  },
+});
+
+const Invest = ({ investment = [], allInvestment }) => {
+  useEffect(() => {
+    allInvestment();
+  }, []);
+
+  const renturnInvestment = (investment) => {
+    if (investment.length === 0)
+      return (
+        <div className="">
+          <p>Fetching your investment...</p>
+        </div>
+      );
+    return investment.map((inv) => (
+      <TableRow>
+        <TableCell component="th" scope="row">
+          {inv.plan}({inv.percentage})
+        </TableCell>
+        <TableCell align="center">
+          ₦{inv.amount.toString().replace(/(.)(?=(\d{3})+$)/g, "$1,")}
+        </TableCell>
+        <TableCell align="center">
+          ₦{inv.roi.toString().replace(/(.)(?=(\d{3})+$)/g, "$1,")}
+        </TableCell>
+        <TableCell align="center">
+          {inv.status === "1" ? (
+            <span className="text-yellow-800 p-2 bg-yellow-100 rounded-sm">
+              Pending
+            </span>
+          ) : inv.status === "2" ? (
+            <span className="text-red-800 p-2 bg-red-100 rounded-sm">
+              Canceled
+            </span>
+          ) : (
+            <span className="text-grren-800 p-2 bg-green-100 rounded-sm">
+              Running
+            </span>
+          )}
+        </TableCell>
+        <TableCell align="center">
+          {inv.payment ? (
+            <span className="text-green-800 p-2 bg-green-100 rounded-sm">
+              Paid
+            </span>
+          ) : (
+            <span className="text-red-800 p-2 bg-red-100 rounded-sm">
+              Not paid
+            </span>
+          )}
+        </TableCell>
+        <TableCell align="center">{inv.paymentPlan}</TableCell>
+        <TableCell align="center">
+          <ButtonGroup>
+            <Link to={`/dashboard/details/${inv._id}`}>
+              <Button
+                color="primary"
+                variant="contained"
+                size="small "
+                style={{ marginRight: "4px" }}
+              >
+                Details
+              </Button>
+            </Link>
+            <Button color="secondary" variant="contained" size="small">
+              Opt-out
+            </Button>
+          </ButtonGroup>
+        </TableCell>
+      </TableRow>
+    ));
+  };
+
+  const table = useStyles();
+  const tablecell = tableCell();
   return (
     <div className="w-full">
       <h1 className="font-semibold text-3xl mb-4">Investments</h1>
-      <div className="my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
-        <div className="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12">
-          <div className="flex justify-between"></div>
-        </div>
-        <div className="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
-          <table className="min-w-full">
-            <thead>
-              <tr>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">
-                  ID
-                </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  Plan
-                </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  Duration
-                </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  Created At
-                </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  Status
-                </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  Payment
-                </th>
-
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  Subscription
-                </th>
-
-                <th className="px-6 py-3 border-b-2 border-gray-300" />
-              </tr>
-            </thead>
-            <tbody className="bg-white">
-              <tr>
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div className="flex items-center">
-                    <div>
-                      <div className="text-sm leading-5 text-gray-800">
-                        #1ery56hkdjdhxkd6
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div className="text-sm leading-5 text-blue-900">
-                    Diamond Excutive
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  6 months
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  25/january/2021
-                </td>
-
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                  <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                    />
-                    <span className="relative text-xs">pending</span>
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  paystack
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  <button className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">
-                    Opt-Out
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <TableContainer component={Paper}>
+        <Table className={table.table} aria-label="simple table">
+          <TableHead className={table.root}>
+            <TableRow>
+              <TableCell className={tablecell.root} align="center">
+                Plan
+              </TableCell>
+              <TableCell className={tablecell.root} align="center">
+                Initial Capital
+              </TableCell>
+              <TableCell className={tablecell.root} align="center">
+                ROI
+              </TableCell>
+              <TableCell className={tablecell.root} align="center">
+                Status
+              </TableCell>
+              <TableCell className={tablecell.root} align="center">
+                Payment Status
+              </TableCell>
+              <TableCell className={tablecell.root} align="center">
+                Payment Type
+              </TableCell>
+              <TableCell className={tablecell.root} align="center">
+                Actions
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody> {renturnInvestment(investment)} </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  console.log(state);
+  return { investment: state.investments };
+};
 
-export default Invest;
+export default connect(mapStateToProps, { allInvestment })(Invest);

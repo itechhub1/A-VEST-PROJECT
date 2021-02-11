@@ -76,7 +76,7 @@ const PlanDetails = ({
       if (isNaN(percentROI)) return;
       return change(
         "roi",
-        "₦" + percentROI.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        percentROI
       );
     }
   };

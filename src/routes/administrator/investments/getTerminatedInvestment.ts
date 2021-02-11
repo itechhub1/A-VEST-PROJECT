@@ -16,9 +16,8 @@ Router.get(
   requireAuth,
   roleBased([Role.ADMIN]),
   async (req: Request, res: Response) => {
-    const TerminatedInvestment = await investment.find({termination:true}).countDocuments();
-    if (!TerminatedInvestment) return res.send({ count: 0 });
-    return res.send({ count: TerminatedInvestment });
+    const TerminatedInvestment = await investment.find({termination:true})
+    return res.send(TerminatedInvestment);
   }
 );
 

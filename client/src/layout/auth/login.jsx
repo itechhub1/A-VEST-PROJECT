@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
-import {renderFeild} from '../../components/inputFeild'
+import { renderFeild } from "../../components/inputFeild";
+import { signInUser } from "../../action/auth/signin";
+import { connect } from "react-redux";
 
+const Login = ({ handleSubmit, signInUser }) => {
+  const [loading, setloading] = useState(false);
 
-
-const Login = ({ handleSubmit }) => {
   const onSubmit = (formValues) => {
-    console.log(formValues);
+    setloading(true);
+    signInUser(formValues, () => setloading(false));
   };
 
   return (
@@ -63,10 +66,11 @@ const Login = ({ handleSubmit }) => {
                 <p>OR</p>
 
                 <Link
+                  onClick={(e) => (loading ? e.preventDefault() : null)}
                   to="/register"
                   className="text-xs hover:underline hover:text-blue-700 text-gray-700 "
                 >
-                  Create Account
+                  {loading ? "please wait..." : "Create Account"}
                 </Link>
               </div>
             </form>
@@ -90,7 +94,9 @@ const validate = ({ email, password }) => {
 
   return error;
 };
-export default reduxForm({
-  validate,
-  form: "login",
-})(Login);
+export default connect(null, { signInUser })(
+  reduxForm({
+    validate,
+    form: "login",
+  })(Login)
+);

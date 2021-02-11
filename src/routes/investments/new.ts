@@ -5,6 +5,7 @@ import {
   currentUser,
   requireAuth,
   roleBased,
+  BadRequestError,
 } from "@localmarket/common";
 import { body, validationResult } from "express-validator";
 import moment,{Moment} from "moment";
@@ -31,6 +32,51 @@ phonenumberOfKin(pin):"ddd"
 relationshipOfKin(pin):"ddd"
 agreement(pin):true
 paymentPlan(pin):"paystack" */
+
+
+
+
+
+/* 
+
+plan(pin):"Gold Basic"
+percentage(pin):"10% 6months"
+amount(pin):"1000000"
+roi(pin):"₦1,100,000"
+fullname(pin):"Owoeye Oluwatosin Ajibola"
+email(pin):"tohshine@gmail.com"
+phonenumber(pin):"8060516515"
+identity(pin):"National ID"
+employerCompany(pin):"eee"
+occupationDesc(pin):"eeee"
+nameOfKin(pin):"akin"
+addressOfKin(pin):"kpk50"
+phonenumberOfKin(pin):"0923474"
+relationshipOfKin(pin):"married"
+agreement(pin):true
+paymentPlan(pin):"paystack"
+
+*/
+
+/* 
+"expireTime":"2021-08-02",
+ "addressOfKin":"KPK",
+ "amount": 5000000,
+ "relationshipOfKin":"single",
+ "paymentPlan":"paystack",
+ "phonenumber":"08138385529",
+ "plan":"Gold basic",
+ "identity":"volters card",
+ "userId":"6019754ebfbd3d41d65a26af",
+ "employerCompany":"Hi tech hub",
+ "agreement":true,
+ "occupationDesc":"programming school",
+ "phonenumberOfKin":"0813997227",
+ "roi": 65000000,
+ "nextOfKin":"akin",
+ "percentage":"10% 12months"
+
+*/
 
 const extractNumbOfMonths = (percentage: string): number => {
   /* geting interger 18 from  35% 18months */
@@ -63,7 +109,7 @@ router.post(
       agreement,
       paymentPlan,
     } = req.body;
-    if (!req.body) res.send("fill every input feild");
+    if (!req.body)  throw new BadRequestError('input cannot be empty')
 
     if (
       percentage &&
@@ -72,7 +118,6 @@ router.post(
       amount &&
       roi &&
       fullname &&
-    
       email &&
       phonenumber &&
       identity &&
@@ -111,9 +156,9 @@ router.post(
       });
 
       await NewInvestment.save();
-      res.send("form submitted succesfully!!");
+      res.send("Form submitted succesfully!!");
     }else{
-      res.send('inputs are empty')
+      throw new BadRequestError('input cannot be empty')
     }
   }
 );

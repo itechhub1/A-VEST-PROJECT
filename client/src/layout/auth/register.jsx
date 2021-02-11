@@ -1,7 +1,32 @@
-import React from "react";
-import {Link} from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Field, reduxForm } from "redux-form";
+import { Button, makeStyles } from "@material-ui/core";
+import { renderFeild } from "../../components/inputFeild";
+import { registerUser } from "../../action/auth/register";
 
-const Registration = () => {
+const useStyle = makeStyles({
+  root: {
+    backgroundColor: "blue",
+    width: "100%",
+    marginTop: "8px",
+  },
+
+  label: {
+    textTransform: "capitalize",
+  },
+});
+
+const Registration = ({ registerUser, handleSubmit }) => {
+  const [loading, setloading] = useState(false);
+  const classes = useStyle();
+
+  const onSubmit = ({ email,firstname,lastname,password }) => {
+    setloading(true);
+    registerUser({email,firstname,lastname,password}, () => setloading(false));
+  };
+    
   return (
     <div className=" w-full    mx-4 md:max-w-2xl xl:max-w-2xl bg-white dark:bg-transparent dark:text-black md:border">
       <div className="w-full ">
@@ -25,75 +50,57 @@ const Registration = () => {
               />
             </div>
             <h1 className="text-black font-semibold text-xl px-2">SignUp</h1>
-            <form action="" className="mt-4 sm:w-full ">
+            <form className="mt-4 sm:w-full ">
               <div className="sm:px-2">
                 <div className=" flex justify-between items-center">
-                  <div>
-                    <label className="font-bold text-sm mb-2 ml-1">
-                      Firstname
-                    </label>
-                    <input
-                      className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                      placeholder="e.g John"
-                      type="text"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="font-bold text-sm mb-2 ml-1">
-                      Lastname
-                    </label>
-                    <input
-                      className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                      placeholder="e.g Doe"
-                      type="text"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="font-bold text-sm mb-2 ml-1">Email</label>
-                  <div>
-                    <input
-                      className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                      placeholder="Active Email"
-                      type="password"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="font-bold text-sm mb-2 ml-1">
-                    Password
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                    placeholder="Password"
-                    type="password"
+                  <Field
+                    label="First name"
+                    component={renderFeild}
+                    name="firstname"
+                    type="text"
+                  />
+                  <Field
+                    label="Last name"
+                    component={renderFeild}
+                    name="lastname"
+                    type="text"
                   />
                 </div>
+                <Field
+                  label="Email"
+                  component={renderFeild}
+                  name="email"
+                  type="email"
+                />
 
-                <div>
-                  <label className="font-bold text-sm mb-2 ml-1">
-                    Repeat Password
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-                    placeholder="Repeat Password"
-                    type="password"
-                  />
-                </div>
+                <Field
+                  label="Password"
+                  component={renderFeild}
+                  name="password"
+                  type="password"
+                />
+
+                <Field
+                  label="Repeat password"
+                  component={renderFeild}
+                  name="password2"
+                  type="password"
+                />
               </div>
               <div className="mx-2 mb-4">
-                <button className=" w-full mt-4  inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none">
-                  Register
-                </button>
+                <Button
+                  onClick={handleSubmit(onSubmit)} 
+                  disabled={loading}
+                  color="primary"
+                  variant="contained"
+                  className={classes.root}
+                >
+                  <span className={classes.label}> Register</span>
+                </Button>
               </div>
               <button className="text-xs hover:underline hover:text-blue-700 text-gray-700 text-center">
-              <Link to="/" >
-                Click here to login
-              </Link>
+                <Link to="/">Click here to login</Link>
               </button>
-              
             </form>
           </div>
         </div>
@@ -102,4 +109,22 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+const validate = ({ firstname, lastname, email, password, password2 }) => {
+  const error = {};
+  if (!firstname) error.firstname = "input empty";
+  if (!lastname) error.lastname = "input empty";
+  if (!email) error.email = "Email input cannot be empty";
+  if (!password) error.password = "Password input cannot be empty";
+  if (!password2) error.password2 = "Repeat password input cannot be empty";
+
+  if (password !== password2) error.password2 = "Password does not match";
+
+  return error;
+};
+
+export default connect(null, { registerUser })(
+  reduxForm({
+    form: "registerationForm",
+    validate,
+  })(Registration)
+);

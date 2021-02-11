@@ -43,7 +43,7 @@ const NextOfKinDetails = ({ nextPage, prevPage, handleSubmit }) => {
       <div className="mt-4 ">
         <form onSubmit={handleSubmit(submit)}>
           <Field
-            name="nameOfKin"
+            name="nextOfKin"
             component={renderFeild}
             label="Name of next of kin"
             type="text"
@@ -120,15 +120,23 @@ const NextOfKinDetails = ({ nextPage, prevPage, handleSubmit }) => {
   );
 };
 
-const validate = ({ name, address, phoneNumber, relationship, agreement }) => {
+const validate = ({
+  phonenumberOfKin,
+  relationshipOfKin,
+  agreement,
+  nextOfKin,
+  addressOfKin,
+}) => {
   const error = {};
-  if (!name) error.name = "name cannot be empty";
-  if (!address) error.address = "address company name  cannot be empty";
-  if (!phoneNumber) {
-    error.phoneNumber = "phone number   cannot be empty";
+
+  if (!addressOfKin) error.addressOfKin = "address of kin  cannot be empty";
+  if (!nextOfKin) error.nextOfKin = "nextOfKin  name  cannot be empty";
+
+  if (!phonenumberOfKin) {
+    error.phonenumberOfKin = "phone number   cannot be empty";
   }
-  if (!relationship) {
-    error.relationship = "relationship  cannot be empty";
+  if (!relationshipOfKin) {
+    error.relationshipOfKin = "relationship of kin  cannot be empty";
   }
 
   if (!agreement) {

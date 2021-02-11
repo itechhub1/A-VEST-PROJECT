@@ -48,7 +48,8 @@ router.post(
   ValidationResult,
   async (req: Request, res: Response) => {
     const { firstname, lastname, email, password } = req.body;
-
+     console.log(req.body);
+     
     //genrating random string
     const randomString = randomBytes(8).toString("hex");
 

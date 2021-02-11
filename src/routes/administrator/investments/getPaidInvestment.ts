@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { investment } from "../../../models/Investments";
-import {Role} from '../../../util'
+import { Role } from "../../../util";
 import {
   currentUser,
   requireAuth,
@@ -16,9 +16,9 @@ Router.get(
   requireAuth,
   roleBased([Role.ADMIN]),
   async (req: Request, res: Response) => {
-    const PaidInvestment = await investment.find({payment:true}).countDocuments();
-    if (!PaidInvestment) return res.send({ count: 0 });
-    return res.send({ count: PaidInvestment });
+    const PaidInvestment = await investment.find({ payment: true });
+
+    return res.send(PaidInvestment);
   }
 );
 
