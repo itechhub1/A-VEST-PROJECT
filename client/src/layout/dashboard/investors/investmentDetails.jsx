@@ -68,19 +68,21 @@ createdAt(pin):"2021-02-09T16:35:06.847Z"
         </p>
       </div>
       <div className="bg-gray-100 p-4 my-4">
-        <div className="grid  grid-cols-2 gap-2">
-          <h3 className="text-blue-800  text-3xl pb-2">Personal Data</h3>
-          <h6 className="text-blue-800  text-3xl pb-2">Other information</h6>
-        </div>
-        <div className=" grid grid-cols-2 gap-2">
-          <SingleDetails details={details} />
+        <div className=" grid md:grid-cols-2 gap-2">
+          <div className="">
+            <h3 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2">Personal Data</h3>
+            <SingleDetails details={details} />
+          </div>
+          <div className="">
+            <h6 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2">Other information</h6>
+            <OtherDetails details={details} />
+          </div>{" "}
           {/* other info */}
-          <OtherDetails details={details} />
         </div>
       </div>
 
       <div className="bg-gray-100 p-4 my-4">
-        <h3 className="text-blue-800  text-3xl pb-2">Investment Plan</h3>
+        <h3 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2">Investment Plan</h3>
         <div className=" grid-cols-1">
           <div className="">
             {/* investment plan */}
@@ -99,7 +101,7 @@ createdAt(pin):"2021-02-09T16:35:06.847Z"
       </div>
 
       <div className="bg-gray-100 p-4 my-4">
-        <h3 className="text-blue-800 text-3xl pb-2">Others</h3>
+        <h3 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2 ">Others</h3>
         <div className=" grid-cols-1">
           {/* employers details */}
 

@@ -1,4 +1,5 @@
 import Mongoose, { Model, Document } from "mongoose";
+import { mongoose } from "../config/database";
 
 interface userAtrr {
   _id: string;
@@ -6,6 +7,8 @@ interface userAtrr {
   phonenumber: string;
   dob: string;
   nationality: string;
+  identity: string;
+  attachment: string;
 }
 
 interface userDoc extends Document {
@@ -14,6 +17,8 @@ interface userDoc extends Document {
   phonenumber: string;
   dob: string;
   nationality: string;
+  identity: string;
+  attachment: string;
 }
 
 interface userModel extends Model<userDoc> {
@@ -23,7 +28,7 @@ interface userModel extends Model<userDoc> {
 const profileSchma = new Mongoose.Schema(
   {
     _id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     phonenumber: {
@@ -39,6 +44,14 @@ const profileSchma = new Mongoose.Schema(
       required: true,
     },
     nationality: {
+      type: String,
+      required: true,
+    },
+    identity: {
+      type: String,
+      required: true,
+    },
+    attachment: {
       type: String,
       required: true,
     },

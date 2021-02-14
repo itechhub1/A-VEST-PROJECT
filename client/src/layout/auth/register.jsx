@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { Button, makeStyles } from "@material-ui/core";
 import { renderFeild } from "../../components/inputFeild";
-import { registerUser } from "../../action/auth/register";
+import { registerUser, } from "../../action";
 
 const useStyle = makeStyles({
   root: {

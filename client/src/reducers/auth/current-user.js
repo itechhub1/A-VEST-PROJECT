@@ -4,7 +4,7 @@ const initialState = {
   isAuth: false,
 };
 
-export const CurrentUser = (state = initialState, action) => {
+export const currentuser = (state = initialState, action) => {
   switch (action.type) {
     case currentUser:
       return {

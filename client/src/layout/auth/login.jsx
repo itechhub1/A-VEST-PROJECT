@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { renderFeild } from "../../components/inputFeild";
-import { signInUser } from "../../action/auth/signin";
+import { signInUser } from "../../action";
 import { connect } from "react-redux";
 
 const Login = ({ handleSubmit, signInUser }) => {

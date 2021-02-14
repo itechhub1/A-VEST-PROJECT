@@ -1,34 +1,8 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { renderFeild } from "../../../../components/inputFeild";
-import { identification } from "../../../../constant";
+
 import liphonenumber from "libphonenumber-js";
-
-const renderOptionFeild = ({ input, meta }) => {
-  //if (!data) return;
-  return (
-    <div className="">
-      <p className="font-bold text-sm mb-2 ml-1">Means of identifications</p>
-      <select
-        {...input}
-        className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
-      >
-        <option value="" disabled>
-          --- select means of identification --
-        </option>
-        {identification.map((_) => (
-          <option value={_}>{_}</option>
-        ))}
-      </select>
-
-      {meta.touched && meta.error ? (
-        <div className=" text-xs text-red-600 italic ">{meta.error}</div>
-      ) : (
-        ""
-      )}
-    </div>
-  );
-};
 
 const personalInformation = ({ nextPage, prevPage, handleSubmit }) => {
   const onNext = () => nextPage();
@@ -52,8 +26,6 @@ const personalInformation = ({ nextPage, prevPage, handleSubmit }) => {
           name="phonenumber"
           label="phone number"
         />
-
-        <Field component={renderOptionFeild} name="identity" />
 
         <div className="flex items-center mt-2">
           <button
@@ -102,20 +74,16 @@ const personalInformation = ({ nextPage, prevPage, handleSubmit }) => {
 };
 
 const validate = ({ identity, phonenumber }) => {
-  let isPhoneNumber
- if ( typeof phonenumber === 'string') {
-     isPhoneNumber = liphonenumber(phonenumber, "NG");
- 
- }
-
-  const error = {};
-  if (!identity) {
-    error.identity = "means of identification cannot be empty";
+  let isPhoneNumber;
+  if (typeof phonenumber === "string") {
+    isPhoneNumber = liphonenumber(phonenumber, "NG");
   }
 
-  if (isPhoneNumber=== undefined || !isPhoneNumber.isValid()) {
-    (error.phonenumber = "input must be a valid phone number"); 
-  } 
+  const error = {};
+
+  if (isPhoneNumber === undefined || !isPhoneNumber.isValid()) {
+    error.phonenumber = "input must be a valid phone number";
+  }
   return error;
 };
 

@@ -1,14 +1,14 @@
 import mongoose, { Model, Document } from "mongoose";
 import { InvesmentStatus, Role } from "../util";
-import {Moment} from 'moment'
+import { Moment } from "moment";
 
 interface investmentAtrr {
   fullname: string;
   email: string;
   phonenumber: string;
-  identity: string;
+
   plan: string;
-  monthsLeft?:string
+  monthsLeft?: string;
   percentage: string;
   amount: number;
   roi: number;
@@ -25,17 +25,17 @@ interface investmentAtrr {
   paymentRef?: string;
   termination?: boolean;
   investementExpired?: boolean;
-  expireTime:string
-  userId?:string
+  expireTime: string;
+  userId?: string;
 }
 
 interface investmentDoc extends Document {
   fullname: string;
   email: string;
   phonenumber: string;
-  identity: string;
+
   plan: string;
-  monthsLeft?:string
+  monthsLeft?: string;
   percentage: string;
   amount: number;
   roi: number;
@@ -52,8 +52,8 @@ interface investmentDoc extends Document {
   paymentRef?: string;
   termination?: boolean;
   investementExpired?: boolean;
-  expireTime:string
-  userId:string
+  expireTime: string;
+  userId: string;
 }
 
 interface investmentModel extends Model<investmentDoc> {
@@ -74,15 +74,12 @@ const invesmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    identity: {
-      type: String,
-      required: true,
-    },
+
     plan: {
       type: String,
       required: true,
     },
-  
+
     percentage: {
       type: String,
       required: true,
@@ -139,19 +136,19 @@ const invesmentSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    investementExpired:{
-      type:Boolean,
-      default:false
+    investementExpired: {
+      type: Boolean,
+      default: false,
     },
-    expireTime:{
-      type:String
+    expireTime: {
+      type: String,
     },
     agreement: {
       type: Boolean,
       required: true,
     },
-    monthsLeft:{
-    type:String
+    monthsLeft: {
+      type: String,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

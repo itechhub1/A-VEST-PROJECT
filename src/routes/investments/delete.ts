@@ -13,7 +13,7 @@ import { investment as Investment } from "../../models/Investments";
 const router = express.Router();
 
 router.delete(
-  "/api/investemnt/delete/:id",
+  "/api/investment/delete/:id",
   currentUser,
   requireAuth,
   roleBased([Role.USER]),

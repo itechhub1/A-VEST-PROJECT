@@ -21,3 +21,5 @@ export default async () => {
 
   await adminReg.save();
 };
+
+

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { CurrentUser } from "../action/auth/currentUser";
+import { CurrentUser } from "../action";
 import history from "../history";
 
 import { Link } from "react-router-dom";
@@ -30,7 +30,7 @@ const PrivateRoute = ({ user, CurrentUser, component: Component, ...rest }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { user: state.CurrentUser };
+  return { user: state.currentuser };
 };
 
 export default connect(mapStateToProps, { CurrentUser })(PrivateRoute);

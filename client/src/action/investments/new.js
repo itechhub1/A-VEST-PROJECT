@@ -9,7 +9,7 @@ export  const NewInvestment = (formInput, cb) => async (dispatch) => {
     const res = await axios.post("/api/investment/new", formInput);
     dispatch(serverMessage(res.status, res.data));
     cb();
-    history.push('/dashboard/main')
+    history.push('/dashboard/investment')
   } catch (error) {
     serverMessage(error.response.status, error.response.data);
     cb();

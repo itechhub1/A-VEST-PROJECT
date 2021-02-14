@@ -3,6 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { allInvestment } from "../../../action/investments";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteInvestement } from "../../../action/investments";
+import MakePayment from "../../../components/paystack/payment";
+
 import {
   Button,
   ButtonGroup,
@@ -33,7 +36,7 @@ const tableCell = makeStyles({
   },
 });
 
-const Invest = ({ investment = [], allInvestment }) => {
+const Invest = ({ deleteInvestement, investment, allInvestment }) => {
   useEffect(() => {
     allInvestment();
   }, []);
@@ -58,31 +61,39 @@ const Invest = ({ investment = [], allInvestment }) => {
         </TableCell>
         <TableCell align="center">
           {inv.status === "1" ? (
-            <span className="text-yellow-800 p-2 bg-yellow-100 rounded-sm">
+            <span className="text-yellow-800 p-2 bg-yellow-100 rounded-sm text-xs">
               Pending
             </span>
           ) : inv.status === "2" ? (
-            <span className="text-red-800 p-2 bg-red-100 rounded-sm">
+            <span className="text-red-800 p-2 bg-red-100 rounded-sm text-xs">
               Canceled
             </span>
           ) : (
-            <span className="text-grren-800 p-2 bg-green-100 rounded-sm">
+            <span className="text-grren-800 p-2 bg-green-100 rounded-sm text-xs">
               Running
             </span>
           )}
         </TableCell>
         <TableCell align="center">
           {inv.payment ? (
-            <span className="text-green-800 p-2 bg-green-100 rounded-sm">
+            <span className="text-green-800 p-2 bg-green-100 rounded-sm text-xs">
               Paid
             </span>
           ) : (
-            <span className="text-red-800 p-2 bg-red-100 rounded-sm">
+            <p className="text-red-800 p-2 bg-red-100 rounded-sm text-xs  ">
               Not paid
-            </span>
+            </p>
           )}
         </TableCell>
-        <TableCell align="center">{inv.paymentPlan}</TableCell>
+        <TableCell align="center">
+          {inv.paymentPlan === "paystack" ? (
+            <MakePayment amount={inv.amount} />
+          ) : (
+            <p className="italic text-gray-800 text-xs">
+              selected bank deposit
+            </p>
+          )}
+        </TableCell>
         <TableCell align="center">
           <ButtonGroup>
             <Link to={`/dashboard/details/${inv._id}`}>
@@ -90,14 +101,20 @@ const Invest = ({ investment = [], allInvestment }) => {
                 color="primary"
                 variant="contained"
                 size="small "
-                style={{ marginRight: "4px" }}
+                style={{ marginRight: "4px" ,fontSize:"8px"}}
               >
                 Details
               </Button>
             </Link>
-            <Button color="secondary" variant="contained" size="small">
-              Opt-out
-            </Button>
+            {inv.status==="0"&&<Button
+              onClick={deleteInvestement}
+              color="secondary"
+              variant="contained"
+              size="small"
+              style={{fontSize:"8px"}}
+            >
+              cancel
+            </Button>}
           </ButtonGroup>
         </TableCell>
       </TableRow>
@@ -147,4 +164,6 @@ const mapStateToProps = (state) => {
   return { investment: state.investments };
 };
 
-export default connect(mapStateToProps, { allInvestment })(Invest);
+export default connect(mapStateToProps, { deleteInvestement, allInvestment })(
+  Invest
+);

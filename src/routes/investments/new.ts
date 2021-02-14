@@ -99,7 +99,7 @@ router.post(
      
       email,
       phonenumber,
-      identity,
+  
       employerCompany,
       occupationDesc,
       nextOfKin,
@@ -120,7 +120,7 @@ router.post(
       fullname &&
       email &&
       phonenumber &&
-      identity &&
+  
       employerCompany &&
       occupationDesc &&
       nextOfKin &&
@@ -145,7 +145,7 @@ router.post(
         paymentPlan,
         phonenumber,
         plan,
-        identity,
+       
         userId: req.currentUser?.id,
         employerCompany,
         occupationDesc,

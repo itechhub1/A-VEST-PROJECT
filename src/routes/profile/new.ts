@@ -17,7 +17,9 @@ router.post(
   requireAuth,
   roleBased([Role.USER]),
   async (req: Request, res: Response) => {
-    const { dob, phonenumber, relationship, nationality } = req.body;
+    console.log(req.body);
+    
+    const { dob, phonenumber, relationship, nationality,identity,attachment } = req.body;
     if (!req.currentUser?.id) throw new NotAuthorizeError();
     const profile = Profile.build({
       relationship,
@@ -25,9 +27,13 @@ router.post(
       dob,
       nationality,
       _id: req.currentUser?.id,
+      attachment,
+      identity
     });
 
     await profile.save()
     return res.send(profile)
   }
 );
+
+export {router as AddProfile}

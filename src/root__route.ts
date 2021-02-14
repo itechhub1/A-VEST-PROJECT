@@ -6,8 +6,7 @@ import { NewInvestment } from "./routes/investments/new";
 import { viewMyInvestment } from "./routes/investments/view";
 import { AllInvestment } from "./routes/investments/index";
 import { OptOutInvestement } from "./routes/investments/delete";
-import {AccountcurrentUser} from './routes/auth/currentuser'
-
+import { AccountcurrentUser } from "./routes/auth/currentuser";
 
 import { EmailVerification } from "./routes/auth/emailverification";
 import { AdministratorLogin } from "./routes/administrator/auth/login";
@@ -16,24 +15,29 @@ import { twoFactorVerify } from "./routes/administrator/auth/verify2FA";
 import { AllAimartInvestment } from "./routes/administrator/investments/index";
 import { ViewInvestment } from "./routes/administrator/investments/view";
 import { ExtentendInvestment } from "./routes/administrator/investments/update";
-import {GetAllUserCount} from './routes/administrator/investments/getUserCount'
-import {BankTransferUpdate} from './routes/administrator/investments/bankTranferUpdate'
-import {GetAllInvestment} from './routes/administrator/investments/getInvestmentCount'
-import {GetAllPaidInvestmentCount} from './routes/administrator/investments/getPaidInvestmentCount'
-import { GetAllTerminatedInvestment} from './routes/administrator/investments/getTerminatedInvestment'
-import {GetAllRegisteredUsers} from './routes/administrator/investments/getUser'
-import {GetAllPaidInvestment} from './routes/administrator/investments/getPaidInvestment'
+import { GetAllUserCount } from "./routes/administrator/investments/getUserCount";
+import { BankTransferUpdate } from "./routes/administrator/investments/bankTranferUpdate";
+import { GetAllInvestment } from "./routes/administrator/investments/getInvestmentCount";
+import { GetAllPaidInvestmentCount } from "./routes/administrator/investments/getPaidInvestmentCount";
+import { GetAllTerminatedInvestment } from "./routes/administrator/investments/getTerminatedInvestment";
+import { GetAllRegisteredUsers } from "./routes/administrator/investments/getUser";
+import { GetAllPaidInvestment } from "./routes/administrator/investments/getPaidInvestment";
 
-
-
-
+import { ViewUserProfile } from "./routes/profile/view";
+import { AddProfile } from "./routes/profile/new";
+import { fileUploadROuter } from "./routes/profile/uploads";
 
 const rootRoute = (app: Express) => {
   /* investors auth */
   app.use(AccountCreation);
   app.use(AccountLogin);
   app.use(EmailVerification);
-  app.use(AccountcurrentUser)
+  app.use(AccountcurrentUser);
+
+  /* investor profile */
+  app.use(ViewUserProfile);
+  app.use(fileUploadROuter);
+  app.use(AddProfile);
 
   /* investors investment */
   app.use(NewInvestment);
@@ -55,8 +59,7 @@ const rootRoute = (app: Express) => {
   app.use(GetAllPaidInvestment);
   app.use(GetAllPaidInvestmentCount);
   app.use(GetAllTerminatedInvestment);
-  app.use(GetAllRegisteredUsers)
-
+  app.use(GetAllRegisteredUsers);
 };
 
 export { rootRoute };

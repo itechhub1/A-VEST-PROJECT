@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 import "./notification.css";
 
@@ -10,15 +11,27 @@ const notification = ({ notification }) => {
   const notifiationDisplay = () => {
     if (notification) {
       const { status, message } = notification;
+      console.log(status);
       const type = isArray(message.error);
       if (type) {
         return (
-          <ul>
-            <li className="p-2 ">{message.error[0].message}</li>
-          </ul>
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            Attention — <strong>{message.error[0].message}</strong>
+          </Alert>
+        );
+      } else if ([400, 401, 500].includes(status)) {
+        return (
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            Attention — <strong>{message}</strong>
+          </Alert>
         );
       } else {
-        return <span className="p-4">{message}</span>;
+        <Alert severity="success">
+          <AlertTitle>Success</AlertTitle>
+          Success — <strong>{message}</strong>
+        </Alert>;
       }
     }
   };

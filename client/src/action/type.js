@@ -13,9 +13,18 @@ export const logout = "LOGOUT";
 export const newInvestment = "NEW_INVESTMENT";
 export const getInvestments = "GET_INVESTMENTS";
 export const cancelInvestment = "CANCEL_INVESTMENT";
-export const viewInvestment = "VIEW_INVESTMENT"
+export const viewInvestment = "VIEW_INVESTMENT";
+export const Payments = "MAKE_PAYMENT";
 
 /* PROFILE */
 export const newProfile = "NEW_PROFILE";
 export const updateProfile = "UPDATE_PROFILE";
 export const getProfile = "GET_PROFILE";
+
+/* UPLOAD */
+export const failureUpload = "FAILED_UPLOAD";
+export const successUpload = "SUCCESS_UPLOAD";
+export const progressUpload = "PROGRESS_UPLOAD";
+export const modifyFile = "MODIFY_FILE";
+export const saveKeyToState = "SAVE_KEY_TO_STATE";
+export const cancelFileUpload = "CANCEL_FILE_UPLOAD";

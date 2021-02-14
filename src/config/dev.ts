@@ -9,6 +9,6 @@ module.exports = {
   sendGridKEY:
     "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",
   /* AWS CREDENTIALS */
-  accessKeyId: "AKIAYY3T57CGIQ52NIS3",
-  secretAccessKey: "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",
+  accessKeyId: "AKIAV5XPTYI3LNKUDHXT",
+  secretAccessKey: "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",
 };
