@@ -22,7 +22,7 @@ router.put(
   ],
   ValidationResult,
 
-  roleBased([Role.ADMIN]),
+  roleBased([Role.USER]),
   async (req: Request, res: Response) => {
     const { newPassword, oldPassword } = req.body;
 

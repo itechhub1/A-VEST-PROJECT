@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { parse } from "query-string";
 
-import {logout} from '../../../action/auth/logout'
+//import {logout} from '../../../action/auth/logout'
 import {connect} from 'react-redux'
 
 const Sidenav = ({logout}) => {
@@ -15,7 +15,7 @@ const Sidenav = ({logout}) => {
       {/* Left side NavBar */}
       <div>
         <img
-          src={require("../../../assets/logo.jpeg").default}
+          src={require("../../../../assets/logo.jpeg").default}
           className="h-20 w-20  object-contain"
           alt="aimart investment"
         />
@@ -94,7 +94,7 @@ const Sidenav = ({logout}) => {
           className="mt-3 p-2 hover:text-blue-600 dark-hover:text-blue-300
 				rounded-lg"
         >
-          <Link to="/dashboard/investment" className=" flex flex-col items-center">
+          <Link to="/admin/investment" className=" flex flex-col items-center">
             <svg
               className="h-7 w-7 md:h-5 md:w-5  "
               xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@ const Sidenav = ({logout}) => {
 			dark:text-red-500 rounded-full"
       >
         {/* important action */}
-        <a href="#!" onClick={logout} className="flex flex-col items-center">
+        <a href="#!"  className="flex flex-col items-center">
           <svg
             class=" text-red-700"
             xmlns="http://www.w3.org/2000/svg"
@@ -156,4 +156,4 @@ const Sidenav = ({logout}) => {
   );
 };
 
-export default connect(null,{logout}) (Sidenav);
+export default connect(null,{}) (Sidenav);

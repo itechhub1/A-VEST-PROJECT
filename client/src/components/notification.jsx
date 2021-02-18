@@ -28,10 +28,12 @@ const notification = ({ notification }) => {
           </Alert>
         );
       } else {
-        <Alert severity="success">
-          <AlertTitle>Success</AlertTitle>
-          Success — <strong>{message}</strong>
-        </Alert>;
+        return (
+          <Alert severity="success">
+            <AlertTitle>Success</AlertTitle>
+            Success — <strong>{message}</strong>
+          </Alert>
+        );
       }
     }
   };
@@ -43,24 +45,7 @@ const notification = ({ notification }) => {
     >
       <div className="w-full">
         {Object.values(notification).length !== 0 && (
-          /*  <Alert
-          severity={
-            notification.status === (400 || 500 || 401) ? "error" : "success"
-          }
-          className='w-full'
-        >
-          {notifiationDisplay()}
-        </Alert>
- */
-          <div
-            className={
-              [400, 401, 500].includes(notification.status)
-                ? " bg-red-200 text-red-800"
-                : " bg-green-200 text-green-800"
-            }
-          >
-            {notifiationDisplay()}
-          </div>
+          <div>{notifiationDisplay()}</div>
         )}
       </div>
     </div>

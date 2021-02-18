@@ -9,9 +9,9 @@ export const investments = (state = initialState, action) => {
 
     case cancelInvestment:
       const result = state.filter(
-        (investment) => investment._id !== action.payload
+        (investment) => investment._id.toString() !== action.payload.toString()
       );
-      return [result];
+      return result
 
     default:
       return state;

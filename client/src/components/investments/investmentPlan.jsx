@@ -64,7 +64,7 @@ const InvestemntPlan = ({ details, children }) => {
       <h6 className="pb-2 text-sm">
         {" "}
         <span className="tex-base pr-4 font-medium">Ammount:</span>{" "}
-        {amount}
+        ₦{amount.toString().replace(/(.)(?=(\d{3})+$)/g, "$1,")}
       </h6>
 
       <h4 className="pb-2 text-sm">
@@ -75,7 +75,7 @@ const InvestemntPlan = ({ details, children }) => {
       <h5 className="pb-2 text-sm">
         {" "}
         <span className="tex-base pr-4 font-medium">ROI:</span>
-        {roi}
+         ₦{roi.toString().replace(/(.)(?=(\d{3})+$)/g, "$1,")}
       </h5>
       
       {children}

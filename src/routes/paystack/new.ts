@@ -18,15 +18,15 @@ router.put(
   requireAuth,
   roleBased([Role.USER]),
   async (req: Request, res: Response) => {
-    const { paymentRef, investmetId } = req.body;
-    const investment = await Investment.findById(investmetId);
+    const { paymentRef, investmentId } = req.body;
+    const investment = await Investment.findById(investmentId);
     if (!investment) throw new NotFoundError();
 
     /* Authorizations */
 
-    if (investment.userId !== req.currentUser?.id)
+    if (investment.userId.toString() !== req.currentUser?.id.toString())
       throw new NotAuthorizeError();
-
+    
     investment.set({
       paymentRef,
       payment: true,

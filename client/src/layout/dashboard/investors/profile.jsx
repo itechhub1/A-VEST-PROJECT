@@ -47,6 +47,7 @@ const Profile = (props) => {
     AddProfile,
     status,
     initialValues,
+    currentuser,
   } = props;
   console.log(props);
 
@@ -73,17 +74,19 @@ const Profile = (props) => {
         Profile
       </h1>
       <h1 className=" text-xl md:text-2xl text-black mt-2 dark:text-gray-200">
-        Edit / Complete your Profile
+      Complete your Profile
       </h1>
 
       <div className=" max-w-xl bg-white shadow rounded-lg dark:bg-gray-800 dark:text-gray-200 mt-2 p-2 md:p-4 border dark:border-gray-200">
         <div className="">
           <div className="my-2">
-            <h1 className="text-lg font-semibold ">John Doe</h1>
-            <p className="text-base">Doe@doe.com</p>
+            <h1 className="text-lg font-semibold ">
+              {currentuser.firstname} {currentuser.lastname}
+            </h1>
+            <p className="text-base">{currentuser.email}</p>
           </div>
 
-          <form  onSubmit={handleSubmit(submit)}>
+          <form onSubmit={handleSubmit(submit)}>
             <Field
               component={renderFeild}
               placeholder="e.g 0815555555"
@@ -149,7 +152,11 @@ const Profile = (props) => {
                   <input
                     type="file"
                     className="hidden"
-                    onClick={(e) => ((completed || initialValues!==null )? e.preventDefault() : null)}
+                    onClick={(e) =>
+                      completed || initialValues !== null
+                        ? e.preventDefault()
+                        : null
+                    }
                     onChange={onChange}
                   />
                 </label>
@@ -194,7 +201,8 @@ const mapStateToProps = (state, props) => {
 
   return {
     status: state.fileProgress.file[1]?.status,
-    initialValues: state?.profile
+    initialValues: state?.profile,
+    currentuser: state.currentuser,
   };
 };
 

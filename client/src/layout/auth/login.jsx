@@ -55,8 +55,11 @@ const Login = ({ handleSubmit, signInUser }) => {
                 />
               </div>
               <div className="mx-2">
-                <button className=" w-full mt-4  inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none">
-                  Login
+                <button
+                  onClick={(e) => (loading ? e.preventDefault() : null)}
+                  className=" w-full mt-4  inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+                >
+                  {loading ? "please wait..." : "Login"}
                 </button>
               </div>
               <div className="flex justify-between items-center mx-2 mt-4">
@@ -66,11 +69,10 @@ const Login = ({ handleSubmit, signInUser }) => {
                 <p>OR</p>
 
                 <Link
-                  onClick={(e) => (loading ? e.preventDefault() : null)}
                   to="/register"
                   className="text-xs hover:underline hover:text-blue-700 text-gray-700 "
                 >
-                  {loading ? "please wait..." : "Create Account"}
+                  Create Account
                 </Link>
               </div>
             </form>

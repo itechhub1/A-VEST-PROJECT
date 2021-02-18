@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { CurrentUser } from "../action/auth/currentUser";
+import { CurrentUser } from "../action/administrator/auth/currentUser";
 import history from "../history";
-
 
 
 const PrivateRoute = ({ user, CurrentUser, component: Component, ...rest }) => {
@@ -23,14 +22,14 @@ const PrivateRoute = ({ user, CurrentUser, component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        !user.isAuth && !loading ? history.push("/") : <Component {...props} />
+        !user.isAuth && !loading && user.role !== "admin" ? history.push("/admin/login") : <Component {...props} />
       }
     />
   );
 };
 
 const mapStateToProps = (state) => {
-  return { user: state.currentuser };
+  return { user: state.adminAuth };
 };
 
 export default connect(mapStateToProps, { CurrentUser })(PrivateRoute);

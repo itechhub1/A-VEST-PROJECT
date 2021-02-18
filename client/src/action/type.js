@@ -28,3 +28,9 @@ export const progressUpload = "PROGRESS_UPLOAD";
 export const modifyFile = "MODIFY_FILE";
 export const saveKeyToState = "SAVE_KEY_TO_STATE";
 export const cancelFileUpload = "CANCEL_FILE_UPLOAD";
+
+
+/* ADMINISTRATOR */
+export const adminLoginUser = "ADMIN_LOGIN_USER"
+export const adminCurrentUSer = "ADMIN_CURRENT_USER"
+export  const adminAuthEror = 'ADMIN_AUTH_ERROR'

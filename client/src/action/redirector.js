@@ -6,7 +6,7 @@ export const redirector = (response) => {
       return history.push("/dashboard");
 
     case "admin":
-      return history.push("");
+      return history.push("/admin");
 
     default:
       break;

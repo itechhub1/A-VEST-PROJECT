@@ -6,6 +6,7 @@ import {investments} from './investments'
 import {viewInvestments} from './investments/view'
 import{fileProgress} from './file'
 import {profile} from './profile'
+import {adminAuth} from './admin'
 export const reducer = combineReducers({
   form: reducerForm,
   notification,
@@ -13,5 +14,6 @@ export const reducer = combineReducers({
   investments,
   investmentDetails:viewInvestments,
   fileProgress,
-  profile
+  profile,
+  adminAuth
 });

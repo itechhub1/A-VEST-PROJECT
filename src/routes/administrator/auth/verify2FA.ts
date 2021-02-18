@@ -14,6 +14,8 @@ const router = express.Router();
 router.post("/api/admin/2FA", async (req, res) => {
   const { token, adminId } = req.body;
 
+  if(!token) throw new BadRequestError('token invalid')
+
   const _adminUser = await administrator.findById(adminId);
   if (!_adminUser) throw new BadRequestError("Admin Not Found");
 
@@ -42,7 +44,7 @@ router.post("/api/admin/2FA", async (req, res) => {
   /* adding to session */
   req.session!.jwt = JWT;
 
-  res.send(_adminUser);
+  res.send(_adminUser.role);
 });
 
 export { router as twoFactorVerify };

@@ -1,11 +1,13 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
 import { renderFeild } from "../../../components/inputFeild";
+import { updateCredentials } from "../../../action/auth/updateCredentials";
+import { connect } from "react-redux";
 
-const Settings = ({ handleSubmit }) => {
-   const submit =()=>{
-
-   }
+const Settings = ({ handleSubmit, updateCredentials }) => {
+  const submit = (inputValues) => {
+    updateCredentials(inputValues);
+  };
 
   return (
     <div className=" max-w-3xl w-full">
@@ -13,10 +15,28 @@ const Settings = ({ handleSubmit }) => {
         Update Password
       </h1>
       <form onSubmit={handleSubmit(submit)}>
-        <Field name="oldPassword" component={renderFeild} label="Enter old password" />
-        <Field name="newPassword" component={renderFeild} label="Enter new password" />
-        <Field name="repeatPassword" component={renderFeild} label="Repeat  new password" />
-        <button className="bg-red-800 rounded-lg text-white py-2 px-8 mt-4 hover:bg-red-500 focus:outline-none" onSubmit="submit">
+        <Field
+          name="oldPassword"
+          component={renderFeild}
+          label="Enter old password"
+          type="password"
+        />
+        <Field
+          name="newPassword"
+          component={renderFeild}
+          label="Enter new password"
+          type="password"
+        />
+        <Field
+          name="repeatPassword"
+          component={renderFeild}
+          label="Repeat  new password"
+          type="password"
+        />
+        <button
+          className="bg-red-800 rounded-lg text-white py-2 px-8 mt-4 hover:bg-red-500 focus:outline-none"
+          onSubmit="submit"
+        >
           Update Password
         </button>
       </form>
@@ -39,10 +59,19 @@ const validate = ({ oldPassword, newPassword, repeatPassword }) => {
     error.repeatPassword = "repeat password feild cannot be empty";
   }
 
+  if (newPassword !== repeatPassword) {
+    error.repeatPassword = "password does not match";
+  }
+
   return error;
 };
 
-export default reduxForm({
-  form: "updatePassword",
-  validate,
-})(Settings);
+export default connect(
+  null,
+  {updateCredentials}
+)(
+  reduxForm({
+    form: "updatePassword",
+    validate,
+  })(Settings)
+);

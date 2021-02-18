@@ -1,7 +1,10 @@
 import { Express } from "express";
 
 import { AccountLogin } from "./routes/auth/login";
+import { AccountLogout } from "./routes/auth/logout";
 import { AccountCreation } from "./routes/auth/register";
+import { UserUpdateCredentials } from "./routes/auth/updatePassword";
+
 import { NewInvestment } from "./routes/investments/new";
 import { viewMyInvestment } from "./routes/investments/view";
 import { AllInvestment } from "./routes/investments/index";
@@ -10,6 +13,7 @@ import { AccountcurrentUser } from "./routes/auth/currentuser";
 
 import { EmailVerification } from "./routes/auth/emailverification";
 import { AdministratorLogin } from "./routes/administrator/auth/login";
+import {AdmincurrentUser} from './routes/administrator/auth/currentUser'
 import { AdminUpdateCredentials } from "./routes/administrator/auth/updateCredentials";
 import { twoFactorVerify } from "./routes/administrator/auth/verify2FA";
 import { AllAimartInvestment } from "./routes/administrator/investments/index";
@@ -23,6 +27,9 @@ import { GetAllTerminatedInvestment } from "./routes/administrator/investments/g
 import { GetAllRegisteredUsers } from "./routes/administrator/investments/getUser";
 import { GetAllPaidInvestment } from "./routes/administrator/investments/getPaidInvestment";
 
+/* pAYSTACK */
+import { AcknowlegdePayment } from "./routes/paystack/new";
+
 import { ViewUserProfile } from "./routes/profile/view";
 import { AddProfile } from "./routes/profile/new";
 import { fileUploadROuter } from "./routes/profile/uploads";
@@ -33,6 +40,8 @@ const rootRoute = (app: Express) => {
   app.use(AccountLogin);
   app.use(EmailVerification);
   app.use(AccountcurrentUser);
+  app.use(AccountLogout);
+  app.use(UserUpdateCredentials);
 
   /* investor profile */
   app.use(ViewUserProfile);
@@ -49,6 +58,7 @@ const rootRoute = (app: Express) => {
   app.use(AdministratorLogin);
   app.use(AdminUpdateCredentials);
   app.use(twoFactorVerify);
+  app.use(AdmincurrentUser)
 
   app.use(AllAimartInvestment);
   app.use(ViewInvestment);
@@ -60,6 +70,9 @@ const rootRoute = (app: Express) => {
   app.use(GetAllPaidInvestmentCount);
   app.use(GetAllTerminatedInvestment);
   app.use(GetAllRegisteredUsers);
+
+  /* PAYSTACK */
+  app.use(AcknowlegdePayment);
 };
 
 export { rootRoute };
