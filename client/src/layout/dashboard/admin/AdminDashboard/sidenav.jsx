@@ -24,7 +24,7 @@ const Sidenav = ({logout}) => {
         {/* Links */}
         <li className="mt-3 p-2 text-blue-600 dark:text-blue-300 rounded-lg">
           <Link
-            to="/dashboard/main"
+            to="/admin/main"
            
             className=" flex flex-col items-center"
           >
@@ -41,27 +41,7 @@ const Sidenav = ({logout}) => {
             <span className="text-xs mt-2 hidden md:block ">main</span>
           </Link>
         </li>
-        <li
-          className="mt-3 p-2 hover:text-blue-600 dark-hover:text-blue-300 
-				rounded-lg"
-        >
-          <Link to="/dashboard/profile" className=" flex flex-col items-center">
-            <svg
-              className=" fill-current h-7 w-7 md:h-5 md:w-5 "
-              viewBox="0 0 25 25"
-            >
-              <path
-                d="M14.023,12.154c1.514-1.192,2.488-3.038,2.488-5.114c0-3.597-2.914-6.512-6.512-6.512
-								c-3.597,0-6.512,2.916-6.512,6.512c0,2.076,0.975,3.922,2.489,5.114c-2.714,1.385-4.625,4.117-4.836,7.318h1.186
-								c0.229-2.998,2.177-5.512,4.86-6.566c0.853,0.41,1.804,0.646,2.813,0.646c1.01,0,1.961-0.236,2.812-0.646
-								c2.684,1.055,4.633,3.568,4.859,6.566h1.188C18.648,16.271,16.736,13.539,14.023,12.154z M10,12.367
-								c-2.943,0-5.328-2.385-5.328-5.327c0-2.943,2.385-5.328,5.328-5.328c2.943,0,5.328,2.385,5.328,5.328
-								C15.328,9.982,12.943,12.367,10,12.367z"
-              ></path>
-            </svg>
-            <span className="text-xs mt-2 hidden md:block">profile</span>
-          </Link>
-        </li>
+        
         {/* <li
           className="mt-3 p-2 hover:text-blue-600 dark-hover:text-blue-300
 				rounded-lg"
@@ -76,20 +56,7 @@ const Sidenav = ({logout}) => {
             <span className="text-xs mt-2 hidden md:block">earnings</span>
           </a>
         </li> */}
-        <li
-          className="mt-3 p-2 hover:text-blue-600 dark-hover:text-blue-300
-				rounded-lg"
-        >
-          <Link to="/dashboard/plan"  onClick={(e) => id && e.preventDefault()} className=" flex flex-col items-center">
-            <svg
-              className=" fill-current h-7 w-7 md:h-5 md:w-5 "
-              viewBox="0 0 20 20"
-            >
-              <path d="M11.709,7.438H8.292c-0.234,0-0.427,0.192-0.427,0.427v8.542c0,0.234,0.192,0.427,0.427,0.427h3.417c0.233,0,0.426-0.192,0.426-0.427V7.865C12.135,7.63,11.942,7.438,11.709,7.438 M11.282,15.979H8.719V8.292h2.563V15.979zM6.156,11.709H2.74c-0.235,0-0.427,0.191-0.427,0.426v4.271c0,0.234,0.192,0.427,0.427,0.427h3.417c0.235,0,0.427-0.192,0.427-0.427v-4.271C6.583,11.9,6.391,11.709,6.156,11.709 M5.729,15.979H3.167v-3.416h2.562V15.979zM17.261,3.167h-3.417c-0.235,0-0.427,0.192-0.427,0.427v12.812c0,0.234,0.191,0.427,0.427,0.427h3.417c0.234,0,0.427-0.192,0.427-0.427V3.594C17.688,3.359,17.495,3.167,17.261,3.167 M16.833,15.979h-2.562V4.021h2.562V15.979z"></path>
-            </svg>
-            <span className="text-xs mt-2 hidden md:block">plans</span>
-          </Link>
-        </li>
+        
         <li
           className="mt-3 p-2 hover:text-blue-600 dark-hover:text-blue-300
 				rounded-lg"
@@ -114,7 +81,7 @@ const Sidenav = ({logout}) => {
         </li>
         <li className="mt-3 p-2 hover:text-blue-600 rounded-lg">
           <Link
-            to="/dashboard/settings"
+            to="/admin/settings"
             className=" flex flex-col items-center"
           >
             <svg

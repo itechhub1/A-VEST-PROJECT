@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Switch, Route, Router, Redirect } from "react-router-dom";
 import Login from "./layout/auth/login";
 import Register from "./layout/auth/register";
+import { ReactQueryDevtools } from "react-query-devtools";
 
 /* investors Route */
 import InvestorsDashboard from "./layout/dashboard/investors";
@@ -20,6 +21,14 @@ import TwoFactor from "./layout/dashboard/admin/auth/2FA";
 import AdminDashboard from "./layout/dashboard/admin/AdminDashboard";
 import Main from "./layout/dashboard/admin/AdminDashboard/main";
 import AdminInvestment from "./layout/dashboard/admin/AdminDashboard/investment";
+import AdminSettings from "./layout/dashboard/admin/AdminDashboard/setings";
+import InvestmentDetails from "./layout/dashboard/admin/AdminDashboard/details";
+
+/* investment summary */
+import TotalNumberOfCanceledInvestment from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfCanceledInvestment";
+import TotalNumberOfExpiredInv from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfExpiredInvestment";
+import TotalNumberOfInv from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfInvestors";
+import TotalNumberOfPaidInvestors from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfPaidInvestors";
 
 /* Page Not Found */
 import PageNotFound from "./layout/pageNotFound";
@@ -53,8 +62,38 @@ function App() {
           <Route path="/admin">
             <AdminDashboard>
               <Redirect exact={true} from={"/admin"} to={"/admin/main"} />
-              <Route exact path="/admin/main" component={Main} />++
-              <Route exact path="/admin/investment" component={AdminInvestment} />
+              <Route exact path="/admin/main" component={Main} />
+              <Route
+                exact
+                path="/admin/investment"
+                component={AdminInvestment}
+              />
+              <Route
+                exact
+                path="/admin/investors"
+                component={TotalNumberOfInv}
+              />
+              <Route
+                exact
+                path="/admin/cancel-investment"
+                component={TotalNumberOfCanceledInvestment}
+              />
+              <Route
+                exact
+                path="/admin/expired-investment"
+                component={TotalNumberOfExpiredInv}
+              />
+              <Route
+                exact
+                path="/admin/paid-investmentors"
+                component={TotalNumberOfPaidInvestors}
+              />
+              <Route exact path="/admin/settings" component={AdminSettings} />
+              <Route
+                exact
+                path="/admin/details/:id"
+                component={InvestmentDetails}
+              />
             </AdminDashboard>
           </Route>
 
@@ -82,6 +121,7 @@ function App() {
           <Route exact component={PageNotFound} />
         </Switch>
       </Router>
+      <ReactQueryDevtools initialIsOpen={false} />
     </div>
   );
 }

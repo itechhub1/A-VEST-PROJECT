@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-
 import Card from "../../../../components/card";
 import { connect } from "react-redux";
-
-const Main = ({firstname}) => {
+import { Field, reduxForm } from "redux-form";
+import { renderFeild } from "../../../../components/inputFeild";
+import {Link} from 'react-router-dom'
+const Main = ({ firstname }) => {
   const [isDark, setisDark] = useState(false);
   const darkMode = () => {
     let htmlClass = document.querySelector("html").classList;
@@ -63,9 +64,10 @@ const Main = ({firstname}) => {
             )}
           </div>
         </div>
-
+      
         <div className="grid md:grid-cols-4 gap-4 mt-4">
-          <Card classname="bg-blue-100 p-4 py-8 rounded-lg">
+        <Link to="/admin/investors">
+          <Card classname="bg-blue-100 p-4 py-8 shadow-xl cursor-pointer rounded-lg">
             <div className="flex justify-center items-center">
               <div className="">
                 <svg className="fill-current w-10 h-10" viewBox="0 0 20 20">
@@ -85,12 +87,15 @@ const Main = ({firstname}) => {
               </div>
               <div className="ml-2">
                 <h1 className="text-right font-semibold text-blue-800">0.00</h1>
-                <p className="text-blue-800">Returned investment</p>
+                <p className="text-blue-800">Total Number of Investors</p>
               </div>
             </div>
           </Card>
+          </Link>
 
-          <Card classname=" bg-green-100 p-4 py-8 rounded-lg">
+
+         <Link to="/admin/paid-investmentors">
+          <Card classname=" bg-green-100 p-4 py-8 shadow-xl cursor-pointer rounded-lg">
             <div className="flex justify-center items-center">
               <div className="">
                 <svg className="fill-current w-10 h-10" viewBox="0 0 20 20">
@@ -112,12 +117,15 @@ const Main = ({firstname}) => {
                 <h1 className="text-right font-semibold text-green-800">
                   0.00
                 </h1>
-                <p className="text-green-800">Returned investment</p>
+                <p className="text-green-800">Total Number of Paid Investors</p>
               </div>
             </div>
           </Card>
+          </Link>
 
-          <Card classname="bg-purple-100 p-4 py-8 rounded-lg">
+
+          <Link to="/admin/cancel-investment">
+          <Card classname="bg-purple-100 p-4 py-8 shadow-xl cursor-pointer rounded-lg">
             <div className="flex justify-center items-center">
               <div className="">
                 <svg className="fill-current w-10 h-10" viewBox="0 0 20 20">
@@ -139,12 +147,15 @@ const Main = ({firstname}) => {
                 <h1 className="text-right font-semibold text-purple-800">
                   0.00
                 </h1>
-                <p className="text-purple-800">Returned investment</p>
+                <p className="text-purple-800">Total Number of Terminated Investments</p>
               </div>
             </div>
           </Card>
+          </Link>
+         
 
-          <Card classname="bg-yellow-100 p-4 py-8 rounded-lg">
+         <Link to="/admin/expired-investment">
+          <Card classname="bg-yellow-100 p-4 py-8 shadow-xl cursor-pointer rounded-lg">
             <div className="flex justify-center items-center">
               <div className="">
                 <svg className="fill-current w-10 h-10" viewBox="0 0 20 20">
@@ -166,10 +177,11 @@ const Main = ({firstname}) => {
                 <h1 className="text-right font-semibold text-yellow-800">
                   0.00
                 </h1>
-                <p className="text-yellow-800">Returned investment</p>
+                <p className="text-yellow-800">Total Expired Investments</p>
               </div>
             </div>
           </Card>
+          </Link>
         </div>
 
         <div className=" grid md:grid-cols-2 gap-2 mt-8">
@@ -186,10 +198,22 @@ const Main = ({firstname}) => {
               <p className="pt-2">Zenith Bank</p>
             </div>
           </div>
-          <div className="p-4 bg-white shadow dark:bg-gray-800 dark:text-white">
-            <h1 className=" font-semibold text-black md:text-2xl dark:text-gray-200">
-              Recent Activities{" "}
-            </h1>
+          <div className="p-4  bg-white shadow dark:bg-gray-800 dark:text-white">
+            
+
+            <div className="flex flex-col  max-w-sm space-y-2 ">
+              <Field component={renderFeild} name="search" type="text" placeholder="Search by investment Id" label="Search" />
+              <input type="button" value="Search" className="bg-blue-800 p-1 px-8 text-white rounded-md" />
+
+              <strong>search result</strong>
+              <div className="flex justify-center items-center space-x-2 bg-blue-100 border border-blue-800 rounded-md p-1">
+                <h1>Tosin Owoeye</h1>
+                <h2 className="text-sm text-gray-700">Gold basic</h2>
+                 <h3 className="text-sm text-gray-700">1000000</h3>
+                 <input type="button" value="Details" className="bg-blue-800 border text-white border-white p px-4 rounded-md"/>
+
+              </div>
+            </div>
           </div>
         </div>
 
@@ -243,4 +267,15 @@ const mapStateToProps = (state) => {
   return { firstname: state.currentuser.firstname };
 };
 
-export default connect(mapStateToProps)(Main);
+const validate = ({ search }) => {
+  const error = {};
+  if (!search) error.search = "search input empty";
+  return error;
+};
+
+export default connect(mapStateToProps)(
+  reduxForm({
+    form: "searchInput",
+    validate,
+  })(Main)
+);

@@ -10,7 +10,15 @@ router.get(
   requireAuth,
   roleBased([Role.ADMIN]),
   async (req: Request, res: Response) => {
-    const investment = await Investment.find();
+    const MAX_NUMB_OF_PAGES = 10;
+    //@ts-ignore
+    const page: number = Math.max(0, req.query.page);
+
+    const investment = await Investment.find()
+      .limit(MAX_NUMB_OF_PAGES)
+      .skip(MAX_NUMB_OF_PAGES * page)
+      .sort({ timestamp: "desc" })
+      .populate("user");
     return res.send(investment);
   }
 );
