@@ -1,0 +1,20 @@
+.modalPortal {
+  background-color: rgba(3, 3, 3, 0.445);
+  position: fixed;
+  
+  height: 100%;
+  top: 0%;
+
+ 
+
+}
+
+/* .clip-path{
+ clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+}  */
+
+@media (max-width: 700px) {
+  .modal {
+    height: 100%;
+  }
+}
