@@ -16,7 +16,7 @@ Router.get(
   requireAuth,
   roleBased([Role.ADMIN]),
   async (req: Request, res: Response) => {
-    const user = await User.find();
+    const user = await User.find().sort('-createdAt');
   
     return res.send(user);
   }

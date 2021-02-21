@@ -12,7 +12,9 @@ router.get(
   async (req: Request, res: Response) => {
 
     const {id} = req.params
-    const investment = await Investment.findById(id);
+    console.log(id);
+    
+    const investment = await Investment.findById(id).populate('users');
     if(!investment) throw new BadRequestError('No investment with this user found')
 
     return res.send(investment);

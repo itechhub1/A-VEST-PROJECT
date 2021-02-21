@@ -4,6 +4,7 @@ import { serverMessage } from "../notifications";
 import axios from "axios";
 
 export const ViewInvestment = (id, cb) => async (dispatch) => {
+  console.log(id);
   try {
     const { data } = await axios.get(`/api/investment/${id}`);
     dispatch({

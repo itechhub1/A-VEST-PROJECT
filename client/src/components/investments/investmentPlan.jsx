@@ -59,7 +59,7 @@ const InvestemntPlan = ({ details, children }) => {
     <div className=" ">
       <h2 className="pb-2 text-sm">
         {" "}
-        <span className="text-base pr-4 font-medium">Plan:</span> {plan}
+        <span className="text-base pr-4 font-medium">Plan:</span> {plan}{' '}({percentage})
       </h2>
       <h6 className="pb-2 text-sm">
         {" "}

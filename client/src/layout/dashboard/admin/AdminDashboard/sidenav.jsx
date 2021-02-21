@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { parse } from "query-string";
+import {logout} from '../../../../action/auth/logout'
 
 //import {logout} from '../../../action/auth/logout'
 import {connect} from 'react-redux'
@@ -99,7 +100,7 @@ const Sidenav = ({logout}) => {
 			dark:text-red-500 rounded-full"
       >
         {/* important action */}
-        <a href="#!"  className="flex flex-col items-center">
+        <a href="#!" onClick={()=>logout()} className="flex flex-col items-center">
           <svg
             class=" text-red-700"
             xmlns="http://www.w3.org/2000/svg"
@@ -123,4 +124,4 @@ const Sidenav = ({logout}) => {
   );
 };
 
-export default connect(null,{}) (Sidenav);
+export default connect(null,{logout}) (Sidenav);

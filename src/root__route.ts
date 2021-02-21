@@ -21,11 +21,20 @@ import { ViewInvestment } from "./routes/administrator/investments/view";
 import { ExtentendInvestment } from "./routes/administrator/investments/update";
 import { GetAllUserCount } from "./routes/administrator/investments/getUserCount";
 import { BankTransferUpdate } from "./routes/administrator/investments/bankTranferUpdate";
-import { GetAllInvestment } from "./routes/administrator/investments/getInvestmentCount";
-import { GetAllPaidInvestmentCount } from "./routes/administrator/investments/getPaidInvestmentCount";
+import {ViewInvestorProfile} from './routes/administrator/investments/viewInvestorProfile'
+
+
+import { GetAllInvestment } from "./routes/administrator/investments/count/getInvestmentCount";
+import { GetAllPaidInvestmentCount } from "./routes/administrator/investments/count/getPaidInvestmentCount";
+import { GetAllExpiredInvestmentCount } from "./routes/administrator/investments/count/getExpiredInvCount";
+import { GetAllTerminatedInvestmentCount } from "./routes/administrator/investments/count/getTerminatedInvestmentCount";
+
 import { GetAllTerminatedInvestment } from "./routes/administrator/investments/getTerminatedInvestment";
 import { GetAllRegisteredUsers } from "./routes/administrator/investments/getUser";
 import { GetAllPaidInvestment } from "./routes/administrator/investments/getPaidInvestment";
+import { ResolveInvestment } from "./routes/administrator/investments/resolveInvestor";
+
+
 
 /* pAYSTACK */
 import { AcknowlegdePayment } from "./routes/paystack/new";
@@ -33,6 +42,7 @@ import { AcknowlegdePayment } from "./routes/paystack/new";
 import { ViewUserProfile } from "./routes/profile/view";
 import { AddProfile } from "./routes/profile/new";
 import { fileUploadROuter } from "./routes/profile/uploads";
+import { GetAllExpiredInvestment } from "./routes/administrator/investments/getExpiredInvestment";
 
 const rootRoute = (app: Express) => {
   /* investors auth */
@@ -70,6 +80,16 @@ const rootRoute = (app: Express) => {
   app.use(GetAllPaidInvestmentCount);
   app.use(GetAllTerminatedInvestment);
   app.use(GetAllRegisteredUsers);
+
+  app.use(GetAllExpiredInvestment)
+  app.use(GetAllExpiredInvestmentCount)
+  app.use(GetAllExpiredInvestment)
+  app.use(GetAllPaidInvestment)
+  app.use(GetAllPaidInvestment)
+  app.use(GetAllTerminatedInvestment)
+  app.use(GetAllTerminatedInvestmentCount)
+  app.use(ViewInvestorProfile)
+  app.use(ResolveInvestment)
 
   /* PAYSTACK */
   app.use(AcknowlegdePayment);

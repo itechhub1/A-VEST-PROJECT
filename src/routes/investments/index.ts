@@ -11,6 +11,7 @@ router.get(
   roleBased([Role.USER]),
   async (req: Request, res: Response) => {
     const investment = await Investment.find({userId:req.currentUser?.id});
+    if(!investment) return res.send([])
     return res.send(investment);
   }
 );

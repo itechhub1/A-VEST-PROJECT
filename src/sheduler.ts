@@ -1,6 +1,7 @@
 import NodeCron from "node-cron";
 import moment from "moment";
-import { investment as Investemnt, investment } from "./models/Investments";
+import { investment as Investemnt } from "./models/Investments";
+import { InvesmentStatus } from "./util";
 
 moment().format("DD-MM-YYYY");
 
@@ -9,15 +10,20 @@ NodeCron.schedule("* * * * *", async () => {
   console.log("Am runing every min");
   let investment = await Investemnt.find();
   if (!investment) return;
-  investment.map((invest) => {
+  investment.map(async (invest) => {
     /* creating moment time */
     const investmentExpire = moment(invest.expireTime, "DD-MM-YYYY");
     if (investmentExpire.diff(moment(), "days") === 30) {
       /* alert  the investor by email for information for extending or termination */
     }
 
-    if (investmentExpire.diff(moment(), "days") === 0) {
+    if (investmentExpire.diff(moment(), "days") === 0 && invest.payment) {
       /* terminate investement for that particular investor and email the investor */
+      invest.set({
+        status: InvesmentStatus.EXPIRED,
+      });
+
+      await invest.save();
     }
   });
 });
@@ -40,7 +46,7 @@ NodeCron.schedule("0 0 28 * * ", async () => {
         monthsLeft,
       });
 
-      await singleInvestemnt?.save()
+      await singleInvestemnt?.save();
     }
   });
 });

@@ -33,7 +33,7 @@ interface investmentDoc extends Document {
   fullname: string;
   email: string;
   phonenumber: string;
-
+   cleared:boolean
   plan: string;
   monthsLeft?: string;
   percentage: string;
@@ -146,6 +146,9 @@ const invesmentSchema = new mongoose.Schema(
     agreement: {
       type: Boolean,
       required: true,
+    },
+    cleared:{
+     type:Boolean
     },
     monthsLeft: {
       type: String,

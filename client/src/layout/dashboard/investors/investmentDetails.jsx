@@ -17,34 +17,6 @@ const InvestmentDetails = ({ details, ViewInvestment }) => {
     ViewInvestment(detailsId, () => null);
   }, []);
 
-  /* 
-  
-  status(pin):"1"
-payment(pin):false
-termination(pin):false
-investementExpired(pin):false
-_id(pin):"6022b9ba566d8be94d012414"
-addressOfKin(pin):"KPK 9000"
-agreement(pin):true
-amount(pin):1000000
-email(pin):"tohshine@gmail.com"
-fullname(pin):"Owoeye Oluwatosin Ajibola"
-expireTime(pin):"Mon Aug 09 2021 17:35:06 GMT+0100"
-relationshipOfKin(pin):"Married"
-paymentPlan(pin):"paystack"
-phonenumber(pin):"8060516515"
-plan(pin):"Gold Basic"
-identity(pin):"International Passport"
-userId(pin):"60226dba4ebd7d81044f79c0"
-employerCompany(pin):"eee"
-occupationDesc(pin):"eeee"
-phonenumberOfKin(pin):"080336467585"
-roi(pin):1100000
-nextOfKin(pin):"Akin"
-percentage(pin):"10% 6months"
-createdAt(pin):"2021-02-09T16:35:06.847Z"
-  
-  */
   if (details === null) return <div className="">Loading....</div>;
 
   return (
@@ -70,11 +42,15 @@ createdAt(pin):"2021-02-09T16:35:06.847Z"
       <div className="bg-gray-100 p-4 my-4">
         <div className=" grid md:grid-cols-2 gap-2">
           <div className="">
-            <h3 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2">Personal Data</h3>
+            <h3 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2">
+              Personal Data
+            </h3>
             <SingleDetails details={details} />
           </div>
           <div className="">
-            <h6 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2">Other information</h6>
+            <h6 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2">
+              Other information
+            </h6>
             <OtherDetails details={details} />
           </div>{" "}
           {/* other info */}
@@ -82,7 +58,9 @@ createdAt(pin):"2021-02-09T16:35:06.847Z"
       </div>
 
       <div className="bg-gray-100 p-4 my-4">
-        <h3 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2">Investment Plan</h3>
+        <h3 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2">
+          Investment Plan
+        </h3>
         <div className=" grid-cols-1">
           <div className="">
             {/* investment plan */}
@@ -101,7 +79,9 @@ createdAt(pin):"2021-02-09T16:35:06.847Z"
       </div>
 
       <div className="bg-gray-100 p-4 my-4">
-        <h3 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2 ">Others</h3>
+        <h3 className="text-blue-800 text-xl font-semibold md:text-3xl pb-2 ">
+          Others
+        </h3>
         <div className=" grid-cols-1">
           {/* employers details */}
 

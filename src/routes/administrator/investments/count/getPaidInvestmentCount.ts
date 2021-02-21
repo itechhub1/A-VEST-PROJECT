@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { investment } from "../../../models/Investments";
-import {Role} from '../../../util'
+import { investment } from "../../../../models/Investments";
+import {Role} from '../../../../util'
 import {
   currentUser,
   requireAuth,

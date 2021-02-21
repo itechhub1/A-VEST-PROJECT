@@ -11,7 +11,7 @@ import {
 const Router = express.Router();
 
 Router.get(
-  "/api/admin/paid-investment",
+  "/api/admin/expired-investment",
   currentUser,
   requireAuth,
   roleBased([Role.ADMIN]),
@@ -24,16 +24,17 @@ Router.get(
       .find()
       .skip(MAX_NUMB_OF_PAGES * page)
       .countDocuments();
-
-    const PaidInvestment = await investment
-      .find({ payment: true })
-      .sort('-createdAt')
+    const ExpiredInvestment = await investment
+      .find({
+        investementExpired: true,
+      })
+      .sort("-createdAt")
       .limit(MAX_NUMB_OF_PAGES)
       .skip(MAX_NUMB_OF_PAGES * page)
       .populate("user");
-
-    return res.send({ total, investment: PaidInvestment });
+    if (!ExpiredInvestment) throw new BadRequestError("No expired investement");
+    return res.send({ total, investment: ExpiredInvestment });
   }
 );
 
-export { Router as GetAllPaidInvestment };
+export { Router as GetAllExpiredInvestment };

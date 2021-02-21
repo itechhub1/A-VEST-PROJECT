@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { investment as Investment } from "./../../models/Investments";
+import moment, { Moment } from "moment";
 import {
   BadRequestError,
   currentUser,
@@ -26,8 +27,18 @@ router.put(
 
     if (investment.userId.toString() !== req.currentUser?.id.toString())
       throw new NotAuthorizeError();
-    
+
+    /* recalculate expiry date */
+    const extractNumbOfMonths = (percentage: string): number => {
+      /* geting interger 18 from  35% 18months */
+      return parseInt(percentage.split(" ")[1].split("m")[0]);
+    };
+
     investment.set({
+      expireTime: moment().add(
+        extractNumbOfMonths(investment.percentage),
+        "months"
+      ),
       paymentRef,
       payment: true,
       status: InvesmentStatus.ACTIVE,

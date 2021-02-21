@@ -28,7 +28,8 @@ import InvestmentDetails from "./layout/dashboard/admin/AdminDashboard/details";
 import TotalNumberOfCanceledInvestment from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfCanceledInvestment";
 import TotalNumberOfExpiredInv from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfExpiredInvestment";
 import TotalNumberOfInv from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfInvestors";
-import TotalNumberOfPaidInvestors from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfPaidInvestors";
+import TotalNumberOfPaidInvestment from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfPaidInvestment";
+import AdminInvestmentDetails from "./layout/dashboard/admin/AdminDashboard/investmentDetails";
 
 /* Page Not Found */
 import PageNotFound from "./layout/pageNotFound";
@@ -86,13 +87,13 @@ function App() {
               <Route
                 exact
                 path="/admin/paid-investmentors"
-                component={TotalNumberOfPaidInvestors}
+                component={TotalNumberOfPaidInvestment}
               />
               <Route exact path="/admin/settings" component={AdminSettings} />
               <Route
                 exact
-                path="/admin/details/:id"
-                component={InvestmentDetails}
+                path="/admin/details/:detailsId"
+                component={AdminInvestmentDetails}
               />
             </AdminDashboard>
           </Route>

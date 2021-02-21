@@ -42,18 +42,25 @@ const tableCell = makeStyles({
 
 const Invest = ({ deleteInvestement, investment, allInvestment }) => {
   const [open, setopen] = useState(null);
+  const [loading, setloading] = useState(true)
 
   useEffect(() => {
-    allInvestment();
+    allInvestment(()=>setloading(false));
   }, []);
 
   const renturnInvestment = (investment) => {
-    if (investment.length === 0)
+    if (investment.length === 0 && !loading){
       return (
-        <div className="">
-          <p>Fetching your investment...</p>
+        <div className="w-full">
+          <p className="text-center">You have No investment Yet.</p>
         </div>
       );
+    }else{
+    <div className="w-full">
+          <p className="text-center">Loading....</p>
+        </div>
+    }
+      
     return investment.map((inv) => (
       <>
         <TableRow>

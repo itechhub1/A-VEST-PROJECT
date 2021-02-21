@@ -1,5 +1,10 @@
 import express, { Request, Response } from "express";
-import { currentUser, requireAuth, roleBased } from "@localmarket/common";
+import {
+  BadRequestError,
+  currentUser,
+  requireAuth,
+  roleBased,
+} from "@localmarket/common";
 import { Role } from "../../../util";
 import { investment as Investment } from "../../../models/Investments";
 const router = express.Router();
@@ -14,12 +19,17 @@ router.get(
     //@ts-ignore
     const page: number = Math.max(0, req.query.page);
 
+    const total = await Investment.find()
+      .skip(MAX_NUMB_OF_PAGES * page)
+      .countDocuments();
+
     const investment = await Investment.find()
+      .sort('-createdAt')
       .limit(MAX_NUMB_OF_PAGES)
       .skip(MAX_NUMB_OF_PAGES * page)
-      .sort({ timestamp: "desc" })
+
       .populate("user");
-    return res.send(investment);
+    return res.send({ total, investment: investment });
   }
 );
 

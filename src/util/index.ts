@@ -6,5 +6,6 @@ export enum Role{
 export enum InvesmentStatus{
     ACTIVE,
     PENDING,
-    CANCELED
+    CANCELED,
+    EXPIRED
 }
