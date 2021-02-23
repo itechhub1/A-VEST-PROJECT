@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './styles/index.css';
+import './styles/tailwind.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Notification from './components/notification'
@@ -12,7 +13,7 @@ import { store } from "./store";
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-    <Notification/>
+      <Notification />
       <App />
     </React.StrictMode>
   </Provider>,

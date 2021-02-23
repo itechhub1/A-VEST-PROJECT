@@ -15,13 +15,14 @@
     "clean": "del-cli ./build/*",
     "build": "npm run clean && tsc",
     "copy-files": "cp -R ./src/views/ ./build/ && cp -R ./client  ./build/",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build  && npm install --prefix client && npm run build --prefix client && npm run copy-files "
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build  && npm install --prefix client && npm run build --prefix client && npm run copy-files"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@localmarket/common": "^1.0.44",
+    "@tailwindcss/postcss7-compat": "^2.0.3",
     "@types/aws-sdk": "^2.7.0",
     "aws-sdk": "^2.843.0",
     "bcrypt": "^5.0.0",

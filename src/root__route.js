@@ -1,0 +1,84 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rootRoute = void 0;
+var login_1 = require("./routes/auth/login");
+var logout_1 = require("./routes/auth/logout");
+var register_1 = require("./routes/auth/register");
+var updatePassword_1 = require("./routes/auth/updatePassword");
+var new_1 = require("./routes/investments/new");
+var view_1 = require("./routes/investments/view");
+var index_1 = require("./routes/investments/index");
+var delete_1 = require("./routes/investments/delete");
+var currentuser_1 = require("./routes/auth/currentuser");
+var emailverification_1 = require("./routes/auth/emailverification");
+var login_2 = require("./routes/administrator/auth/login");
+var currentUser_1 = require("./routes/administrator/auth/currentUser");
+var updateCredentials_1 = require("./routes/administrator/auth/updateCredentials");
+var verify2FA_1 = require("./routes/administrator/auth/verify2FA");
+var index_2 = require("./routes/administrator/investments/index");
+var view_2 = require("./routes/administrator/investments/view");
+var update_1 = require("./routes/administrator/investments/update");
+var getUserCount_1 = require("./routes/administrator/investments/getUserCount");
+var bankTranferUpdate_1 = require("./routes/administrator/investments/bankTranferUpdate");
+var viewInvestorProfile_1 = require("./routes/administrator/investments/viewInvestorProfile");
+var search_1 = require("./routes/administrator/investments/search");
+var getInvestmentCount_1 = require("./routes/administrator/investments/count/getInvestmentCount");
+var getPaidInvestmentCount_1 = require("./routes/administrator/investments/count/getPaidInvestmentCount");
+var getExpiredInvCount_1 = require("./routes/administrator/investments/count/getExpiredInvCount");
+var getTerminatedInvestmentCount_1 = require("./routes/administrator/investments/count/getTerminatedInvestmentCount");
+var getTerminatedInvestment_1 = require("./routes/administrator/investments/getTerminatedInvestment");
+var getUser_1 = require("./routes/administrator/investments/getUser");
+var getPaidInvestment_1 = require("./routes/administrator/investments/getPaidInvestment");
+var resolveInvestor_1 = require("./routes/administrator/investments/resolveInvestor");
+/* pAYSTACK */
+var new_2 = require("./routes/paystack/new");
+var view_3 = require("./routes/profile/view");
+var new_3 = require("./routes/profile/new");
+var uploads_1 = require("./routes/profile/uploads");
+var getExpiredInvestment_1 = require("./routes/administrator/investments/getExpiredInvestment");
+var rootRoute = function (app) {
+    /* investors auth */
+    app.use(register_1.AccountCreation);
+    app.use(login_1.AccountLogin);
+    app.use(emailverification_1.EmailVerification);
+    app.use(currentuser_1.AccountcurrentUser);
+    app.use(logout_1.AccountLogout);
+    app.use(updatePassword_1.UserUpdateCredentials);
+    /* investor profile */
+    app.use(view_3.ViewUserProfile);
+    app.use(uploads_1.fileUploadROuter);
+    app.use(new_3.AddProfile);
+    /* investors investment */
+    app.use(new_1.NewInvestment);
+    app.use(view_1.viewMyInvestment);
+    app.use(index_1.AllInvestment);
+    app.use(delete_1.OptOutInvestement);
+    /* admin seessin */
+    app.use(login_2.AdministratorLogin);
+    app.use(updateCredentials_1.AdminUpdateCredentials);
+    app.use(verify2FA_1.twoFactorVerify);
+    app.use(currentUser_1.AdmincurrentUser);
+    app.use(index_2.AllAimartInvestment);
+    app.use(view_2.ViewInvestment);
+    app.use(update_1.ExtentendInvestment);
+    app.use(getUserCount_1.GetAllUserCount);
+    app.use(bankTranferUpdate_1.BankTransferUpdate);
+    app.use(getInvestmentCount_1.GetAllInvestment);
+    app.use(getPaidInvestment_1.GetAllPaidInvestment);
+    app.use(getPaidInvestmentCount_1.GetAllPaidInvestmentCount);
+    app.use(getTerminatedInvestment_1.GetAllTerminatedInvestment);
+    app.use(getUser_1.GetAllRegisteredUsers);
+    app.use(search_1.SearchInvestment);
+    app.use(getExpiredInvestment_1.GetAllExpiredInvestment);
+    app.use(getExpiredInvCount_1.GetAllExpiredInvestmentCount);
+    app.use(getExpiredInvestment_1.GetAllExpiredInvestment);
+    app.use(getPaidInvestment_1.GetAllPaidInvestment);
+    app.use(getPaidInvestment_1.GetAllPaidInvestment);
+    app.use(getTerminatedInvestment_1.GetAllTerminatedInvestment);
+    app.use(getTerminatedInvestmentCount_1.GetAllTerminatedInvestmentCount);
+    app.use(viewInvestorProfile_1.ViewInvestorProfile);
+    app.use(resolveInvestor_1.ResolveInvestment);
+    /* PAYSTACK */
+    app.use(new_2.AcknowlegdePayment);
+};
+exports.rootRoute = rootRoute;
