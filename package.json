@@ -2,7 +2,11 @@
   "name": "aimartavestproject",
   "version": "1.0.0",
   "description": "Aimart Investment Scheme",
-  "main": "index.js",
+  "main": "./build/index.js",
+  "files": [
+    "build/**/*",
+    "client/build/**/*"
+  ],
   "scripts": {
     "start:server": "ts-node-dev --poll src/index.ts",
     "start:client": "npm start --prefix client",
