@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { BadRequestError } from "@localmarket/common";
+import { BadRequestError, JWTKEY } from "@localmarket/common";
 import { user } from "../../models/User";
 const key = require("../../config/keys");
 import jwt from "jsonwebtoken";
