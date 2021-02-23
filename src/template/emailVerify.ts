@@ -16,7 +16,7 @@ export const emailVerify = (firstname: string, token: string) => {
       <p class="text-left mb-2 font-normal text-2xl">Dear ${firstname},</p>
       <h1 class="text-blue-700 text-xl font-semibold mb-2">Thank you for registering with Aimart investment</h1>
       <p class="text-gray-800 text-xl  mb-2">kindly Verify your email adress by clicking the link below</p>
-      <a href= http://localhost:5000/api/user/verifyemail/${token} style="background-color: blue; color: white; padding-left: 8px; padding-right: 8px; padding-top: 2px; padding-bottom: 2px; border-radius: 10px;"> Activate Account</a>
+      <a href= https://aimartavest.herokuapp.com/api/user/verifyemail/${token} style="background-color: blue; color: white; padding-left: 8px; padding-right: 8px; padding-top: 2px; padding-bottom: 2px; border-radius: 10px;"> Activate Account</a>
   </div>
   </body>
   </html>`;
