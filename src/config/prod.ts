@@ -3,4 +3,3 @@ module.exports = {
   JWTKEY: process.env.JWTKEY,
   sendGridKEY:process.env.SENDGRID_KEY
 };
-~
