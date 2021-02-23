@@ -4,6 +4,7 @@ import { notification } from "./notification";
 import { currentuser } from "./auth/current-user";
 import { investments } from './investments'
 import { viewInvestments } from './investments/view'
+import { search } from './investments/search'
 import { fileProgress } from './file'
 import { profile } from './profile'
 import { adminAuth } from './admin'
@@ -17,5 +18,6 @@ export const reducer = combineReducers({
   fileProgress,
   profile,
   adminAuth,
-  count
+  count,
+  search
 });

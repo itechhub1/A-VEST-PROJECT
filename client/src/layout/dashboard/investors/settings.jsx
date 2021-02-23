@@ -35,7 +35,7 @@ const Settings = ({ handleSubmit, updateCredentials }) => {
         />
         <button
           className="bg-red-800 rounded-lg text-white py-2 px-8 mt-4 hover:bg-red-500 focus:outline-none"
-          onSubmit="submit"
+         
         >
           Update Password
         </button>

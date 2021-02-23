@@ -7,7 +7,7 @@ import {logout} from '../../../../action/auth/logout'
 import {connect} from 'react-redux'
 
 const Sidenav = ({logout}) => {
-  const { id } = parse(window.location.search);
+
   return (
     <nav
       className="w-16 md:w-20 h-screen flex flex-col items-center bg-white dark:bg-gray-800

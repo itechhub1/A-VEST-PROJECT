@@ -1,29 +1,7 @@
 import React from "react";
 
 const investmentsDetails = ({ details }) => {
-  const {
-    status,
-    payment,
-    termination,
-    investmentExpired,
-    addressOfKin,
-    agreement,
-    amount,
-    email,
-    fullname,
-    expiredTime,
-    relationshipOfKin,
-    paymentPlan,
-    phonenumber,
-    plan,
-    identity,
-    employerComapny,
-    occupationDesc,
-
-    roi,
-    nextOfKin,
-    percentage,
-  } = details;
+  const { status, payment, termination } = details;
 
   return (
     <div className=" inline-block   ">
@@ -51,18 +29,20 @@ const investmentsDetails = ({ details }) => {
               : "bg-green border bg-green-100 border-green-800 text-green-800 rounded-md px-4"
           }
         >
-          {status === "1"
-            ? "Pending"
-            : status === "2"
-            ? "Cancelled"
-            : "Active"}
+          {status === "1" ? "Pending" : status === "2" ? "Cancelled" : "Active"}
         </p>
       </div>
 
       <div className=" inline-flex items-center mt-2 mr-2 ">
         <span className="mr-2">terminated</span>
-        <p className={termination?'border bg-red-100 border-red-800 text-red-800 rounded-md px-4 ':'border bg-green-100 border-green-800 text-green-800 rounded-md px-4 '}>
-          {termination?'Yes':'No'}
+        <p
+          className={
+            termination
+              ? "border bg-red-100 border-red-800 text-red-800 rounded-md px-4 "
+              : "border bg-green-100 border-green-800 text-green-800 rounded-md px-4 "
+          }
+        >
+          {termination ? "Yes" : "No"}
         </p>
       </div>
     </div>

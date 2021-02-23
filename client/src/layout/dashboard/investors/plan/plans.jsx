@@ -5,7 +5,7 @@ import { plans } from "../../../../constant";
 const Plans = ({nextPage}) => {
   const renderPlans = () => {
     return plans.map((plan) => (
-      <div className="w-full p-4 md:w-1/2 lg:w-1/4 plan-card">
+      <div key={plan.name} className="w-full p-4 md:w-1/2 lg:w-1/4 plan-card">
         <label className="flex flex-col rounded-lg shadow-lg group relative cursor-pointer hover:shadow-2xl">
           <div
             className={`w-full px-4 py-6 rounded-t-lg card-section-1 ${

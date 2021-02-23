@@ -22,7 +22,7 @@ import AdminDashboard from "./layout/dashboard/admin/AdminDashboard";
 import Main from "./layout/dashboard/admin/AdminDashboard/main";
 import AdminInvestment from "./layout/dashboard/admin/AdminDashboard/investment";
 import AdminSettings from "./layout/dashboard/admin/AdminDashboard/setings";
-import InvestmentDetails from "./layout/dashboard/admin/AdminDashboard/details";
+
 
 /* investment summary */
 import TotalNumberOfCanceledInvestment from "./layout/dashboard/admin/AdminDashboard/summaryInvestment/TotalNumberOfCanceledInvestment";
@@ -50,7 +50,7 @@ function App() {
   });
 
   return (
-    <div className="h-screen overflow-hidden flex items-center justify-center bg-white dark:bg-gray-800  dark:text-gray-800 select-none">
+    <div className="h-screen overflow-hidden flex items-center justify-center bg-white dark:bg-gray-800  dark:text-gray-800 ">
       <Router history={history}>
         <Switch>
           <Route path="/" component={Login} exact />
@@ -122,7 +122,7 @@ function App() {
           <Route exact component={PageNotFound} />
         </Switch>
       </Router>
-      <ReactQueryDevtools initialIsOpen={false} />
+     {/*  <ReactQueryDevtools initialIsOpen={false} /> */}
     </div>
   );
 }

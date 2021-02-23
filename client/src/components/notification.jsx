@@ -7,11 +7,11 @@ import "./notification.css";
 import { isArray } from "lodash";
 
 const notification = ({ notification }) => {
-  console.log(notification);
+ 
   const notifiationDisplay = () => {
     if (notification) {
       const { status, message } = notification;
-      console.log(status);
+      
       const type = isArray(message.error);
       if (type) {
         return (

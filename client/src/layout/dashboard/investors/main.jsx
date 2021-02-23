@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Card from "../../../components/card";
 import { connect } from "react-redux";
+import { allInvestment } from "../../../action/investments/allInvestment";
 
-const Main = ({firstname}) => {
+const Main = ({ firstname, investments, allInvestment }) => {
   const [isDark, setisDark] = useState(false);
   const darkMode = () => {
     let htmlClass = document.querySelector("html").classList;
@@ -19,6 +20,36 @@ const Main = ({firstname}) => {
     }
   };
 
+  useEffect(() => {
+    allInvestment();
+  }, []);
+
+  const renderNumberOfInvestment = () => {
+    return investments.length;
+  };
+
+  const renderNumberOfExpiredInvestment = () => {
+    const expiredInvestment = investments.filter((inv) => {
+      return inv.expiredInvestment;
+    });
+
+    return expiredInvestment.length;
+  };
+
+  const renderNUmberOfExpiredAndPaid = () => {
+    const expiredInvestment = investments.filter((inv) => {
+      return inv.expiredInvestment && inv.cleared;
+    });
+    return expiredInvestment.length;
+  };
+
+  const renderNUmberOfTerminatedAndPaid = () => {
+    const expiredInvestment = investments.filter((inv) => {
+      return inv.terminated && inv.cleared;
+    });
+    return expiredInvestment.length;
+  };
+
   return (
     <div className="">
       <div className=" flex flex-col">
@@ -29,7 +60,7 @@ const Main = ({firstname}) => {
           </div>
 
           <div id="toggle" className=" text-yellow-500" onClick={darkMode}>
-            {console.log(document.querySelector("#toggle"))}
+            
             {isDark ? (
               <svg
                 className="fill-current w-5 h-5"
@@ -65,7 +96,7 @@ const Main = ({firstname}) => {
         </div>
 
         <div className="grid md:grid-cols-4 gap-4 mt-4">
-          <Card classname="bg-blue-100 p-4 py-8 rounded-lg">
+          <Card classname="bg-blue-100 p-4 shadow-xl   py-8 rounded-lg">
             <div className="flex justify-center items-center">
               <div className="">
                 <svg className="fill-current w-10 h-10" viewBox="0 0 20 20">
@@ -84,13 +115,15 @@ const Main = ({firstname}) => {
                 </svg>
               </div>
               <div className="ml-2">
-                <h1 className="text-right font-semibold text-blue-800">0.00</h1>
-                <p className="text-blue-800">Returned investment</p>
+                <h1 className="text-right font-semibo text-3xl ld text-blue-800">
+                  {renderNumberOfInvestment()}
+                </h1>
+                <p className="text-blue-800"> Total Investment</p>
               </div>
             </div>
           </Card>
 
-          <Card classname=" bg-green-100 p-4 py-8 rounded-lg">
+          <Card classname=" bg-green-100 p-4 shadow-xl   py-8 rounded-lg">
             <div className="flex justify-center items-center">
               <div className="">
                 <svg className="fill-current w-10 h-10" viewBox="0 0 20 20">
@@ -109,15 +142,15 @@ const Main = ({firstname}) => {
                 </svg>
               </div>
               <div className="ml-2">
-                <h1 className="text-right font-semibold text-green-800">
-                  0.00
+                <h1 className="text-right font-semibold text-3xl  text-green-800">
+                  {renderNumberOfExpiredInvestment()}
                 </h1>
-                <p className="text-green-800">Returned investment</p>
+                <p className="text-green-800">Expired Investment</p>
               </div>
             </div>
           </Card>
 
-          <Card classname="bg-purple-100 p-4 py-8 rounded-lg">
+          <Card classname="bg-purple-100 p-4 shadow-xl   py-8 rounded-lg">
             <div className="flex justify-center items-center">
               <div className="">
                 <svg className="fill-current w-10 h-10" viewBox="0 0 20 20">
@@ -136,15 +169,15 @@ const Main = ({firstname}) => {
                 </svg>
               </div>
               <div className="ml-2">
-                <h1 className="text-right font-semibold text-purple-800">
-                  0.00
+                <h1 className="text-right font-semibold text-3xl  text-purple-800">
+                  {renderNUmberOfExpiredAndPaid()}
                 </h1>
-                <p className="text-purple-800">Returned investment</p>
+                <p className="text-purple-800">Paid Investment</p>
               </div>
             </div>
           </Card>
 
-          <Card classname="bg-yellow-100 p-4 py-8 rounded-lg">
+          <Card classname="bg-yellow-100 p-4 shadow-xl   py-8 rounded-lg">
             <div className="flex justify-center items-center">
               <div className="">
                 <svg className="fill-current w-10 h-10" viewBox="0 0 20 20">
@@ -163,17 +196,17 @@ const Main = ({firstname}) => {
                 </svg>
               </div>
               <div className="ml-2">
-                <h1 className="text-right font-semibold text-yellow-800">
-                  0.00
+                <h1 className="text-right font-semibold text-3xl  text-yellow-800">
+                  {renderNUmberOfTerminatedAndPaid()}
                 </h1>
-                <p className="text-yellow-800">Returned investment</p>
+                <p className="text-yellow-800">Terminated & Paid</p>
               </div>
             </div>
           </Card>
         </div>
 
         <div className=" grid md:grid-cols-2 gap-2 mt-8">
-          <div className="p-4 bg-white shadow dark:bg-gray-800 dark:text-white border dark:border-gray-300">
+          <div className="p-4   bg-white shadow dark:bg-gray-800 dark:text-white border dark:border-gray-300">
             <h1 className=" font-semibold text-black md:text-2xl dark:text-gray-200">
               Company Account{" "}
             </h1>
@@ -240,7 +273,10 @@ const Main = ({firstname}) => {
 };
 
 const mapStateToProps = (state) => {
-  return { firstname: state.currentuser.firstname };
+  return {
+    firstname: state.currentuser.firstname,
+    investments: state.investments,
+  };
 };
 
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, { allInvestment })(Main);

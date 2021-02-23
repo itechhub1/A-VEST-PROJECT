@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 
 const SingleDetails = ({ details, children }) => {
   const {
@@ -7,7 +7,6 @@ const SingleDetails = ({ details, children }) => {
     fullname,
 
     phonenumber,
-    identity,
   } = details;
 
   return (

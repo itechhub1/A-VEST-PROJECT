@@ -13,7 +13,7 @@ import { AccountcurrentUser } from "./routes/auth/currentuser";
 
 import { EmailVerification } from "./routes/auth/emailverification";
 import { AdministratorLogin } from "./routes/administrator/auth/login";
-import {AdmincurrentUser} from './routes/administrator/auth/currentUser'
+import { AdmincurrentUser } from "./routes/administrator/auth/currentUser";
 import { AdminUpdateCredentials } from "./routes/administrator/auth/updateCredentials";
 import { twoFactorVerify } from "./routes/administrator/auth/verify2FA";
 import { AllAimartInvestment } from "./routes/administrator/investments/index";
@@ -21,8 +21,8 @@ import { ViewInvestment } from "./routes/administrator/investments/view";
 import { ExtentendInvestment } from "./routes/administrator/investments/update";
 import { GetAllUserCount } from "./routes/administrator/investments/getUserCount";
 import { BankTransferUpdate } from "./routes/administrator/investments/bankTranferUpdate";
-import {ViewInvestorProfile} from './routes/administrator/investments/viewInvestorProfile'
-
+import { ViewInvestorProfile } from "./routes/administrator/investments/viewInvestorProfile";
+import { SearchInvestment } from "./routes/administrator/investments/search";
 
 import { GetAllInvestment } from "./routes/administrator/investments/count/getInvestmentCount";
 import { GetAllPaidInvestmentCount } from "./routes/administrator/investments/count/getPaidInvestmentCount";
@@ -33,8 +33,6 @@ import { GetAllTerminatedInvestment } from "./routes/administrator/investments/g
 import { GetAllRegisteredUsers } from "./routes/administrator/investments/getUser";
 import { GetAllPaidInvestment } from "./routes/administrator/investments/getPaidInvestment";
 import { ResolveInvestment } from "./routes/administrator/investments/resolveInvestor";
-
-
 
 /* pAYSTACK */
 import { AcknowlegdePayment } from "./routes/paystack/new";
@@ -68,7 +66,7 @@ const rootRoute = (app: Express) => {
   app.use(AdministratorLogin);
   app.use(AdminUpdateCredentials);
   app.use(twoFactorVerify);
-  app.use(AdmincurrentUser)
+  app.use(AdmincurrentUser);
 
   app.use(AllAimartInvestment);
   app.use(ViewInvestment);
@@ -80,16 +78,17 @@ const rootRoute = (app: Express) => {
   app.use(GetAllPaidInvestmentCount);
   app.use(GetAllTerminatedInvestment);
   app.use(GetAllRegisteredUsers);
+  app.use(SearchInvestment);
 
-  app.use(GetAllExpiredInvestment)
-  app.use(GetAllExpiredInvestmentCount)
-  app.use(GetAllExpiredInvestment)
-  app.use(GetAllPaidInvestment)
-  app.use(GetAllPaidInvestment)
-  app.use(GetAllTerminatedInvestment)
-  app.use(GetAllTerminatedInvestmentCount)
-  app.use(ViewInvestorProfile)
-  app.use(ResolveInvestment)
+  app.use(GetAllExpiredInvestment);
+  app.use(GetAllExpiredInvestmentCount);
+  app.use(GetAllExpiredInvestment);
+  app.use(GetAllPaidInvestment);
+  app.use(GetAllPaidInvestment);
+  app.use(GetAllTerminatedInvestment);
+  app.use(GetAllTerminatedInvestmentCount);
+  app.use(ViewInvestorProfile);
+  app.use(ResolveInvestment);
 
   /* PAYSTACK */
   app.use(AcknowlegdePayment);

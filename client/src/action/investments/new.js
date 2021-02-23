@@ -4,7 +4,7 @@ import history from '../../history'
 import axios from "axios";
 
 export  const NewInvestment = (formInput, cb) => async (dispatch) => {
-    console.log(formInput);
+  
   try {
     const res = await axios.post("/api/investment/new", formInput);
     dispatch(serverMessage(res.status, res.data));

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+
 import { Field, reduxForm } from "redux-form";
 import { renderFeild } from "../../../../components/inputFeild";
 import { AdminLogin } from "../../../../action/administrator/auth/signin";
@@ -74,7 +74,7 @@ const AdminAuthLogin = ({ handleSubmit, AdminLogin }) => {
 
 const validate = ({ email, password,username }) => {
     const error = {};
-    console.log(error);
+   
     if (!email) {
         error.email = "email Feild Is Empty.";
     }

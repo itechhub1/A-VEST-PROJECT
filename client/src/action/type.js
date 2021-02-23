@@ -19,7 +19,7 @@ export const numberOfPaidInvestment = "NUMBER_OF_PAID_INVESTMENT"
 export const numberOfInvestment = "NUMBER_OF_INVESTORS"
 export const numberOfExpiredInvestment = "NUMBER_OF_EXP_INV"
 export const numberOfCancelInv = "NUMBER_OF_CANCLED_INVESTMENT"
-
+export const searchInvestment = 'SEARCH_INVESTMENT'
 
 /* PROFILE */
 export const newProfile = "NEW_PROFILE";

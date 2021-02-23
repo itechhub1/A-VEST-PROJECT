@@ -42,29 +42,32 @@ const tableCell = makeStyles({
 
 const Invest = ({ deleteInvestement, investment, allInvestment }) => {
   const [open, setopen] = useState(null);
-  const [loading, setloading] = useState(true)
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    allInvestment(()=>setloading(false));
+    allInvestment(() => setloading(false));
   }, []);
 
   const renturnInvestment = (investment) => {
-    if (investment.length === 0 && !loading){
+    if (investment.length === 0 && !loading) {
       return (
         <div className="w-full">
           <p className="text-center">You have No investment Yet.</p>
         </div>
       );
-    }else{
-    <div className="w-full">
-          <p className="text-center">Loading....</p>
-        </div>
+    } else {
+      <div className="w-full">
+        <p className="text-center">Loading....</p>
+      </div>;
     }
-      
+
     return investment.map((inv) => (
       <>
-        <TableRow>
+        <TableRow key={inv._id}>
           <TableCell component="th" scope="row">
+            {inv._id}
+          </TableCell>
+          <TableCell align="center">
             {inv.plan}({inv.percentage})
           </TableCell>
           <TableCell align="center">
@@ -82,8 +85,12 @@ const Invest = ({ deleteInvestement, investment, allInvestment }) => {
               <span className="text-red-800 p-2 bg-red-100 rounded-sm text-xs">
                 Canceled
               </span>
+            ) : inv.status === "3" ? (
+              <span className="text-red-800 p-2 bg-red-100 rounded-sm text-xs">
+                Expired
+              </span>
             ) : (
-              <span className="text-grren-800 p-2 bg-green-100 rounded-sm text-xs">
+              <span className="text-green-800 p-2 bg-green-100 rounded-sm text-xs">
                 Running
               </span>
             )}
@@ -151,6 +158,7 @@ const Invest = ({ deleteInvestement, investment, allInvestment }) => {
         <Table className={table.table} aria-label="simple table">
           <TableHead className={table.root}>
             <TableRow>
+              <TableCell className={tablecell.root}>ID</TableCell>
               <TableCell className={tablecell.root}>Plan</TableCell>
               <TableCell className={tablecell.root} align="center">
                 Initial Capital
@@ -190,7 +198,7 @@ const Invest = ({ deleteInvestement, investment, allInvestment }) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state);
+
   return { investment: state.investments };
 };
 

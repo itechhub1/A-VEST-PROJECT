@@ -25,7 +25,7 @@ const PaymentInfo = ({ prevPage, nexPage, handleSubmit,NewInvestment }) => {
           {...input}
         >
           <option value="" disabled>
-            --- select payment plan ---
+            --- select payment type ---
           </option>
           <option value="paystack">Paystack</option>
           <option value="bank deposit">Bank payment</option>

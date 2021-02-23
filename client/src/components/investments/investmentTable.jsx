@@ -40,14 +40,15 @@ const Investment = ({ api }) => {
     () => api(page)
   );
 
-console.log(resolvedData);
+ 
   const renderInvestment = (resolvedData) => {
     if (status === "loading") {
       return <p>Getting Data</p>;
     } else if (status === "error") {
       return <p>Error fetching data</p>;
     } else if (status === "success") {
-      if (resolvedData.investment.length === 0) return <p className="text-center w-full">No  Data</p>;
+      if (resolvedData.investment.length === 0)
+        return <p className="text-center w-full">No Data</p>;
       return resolvedData.investment.reverse().map((inv) => (
         <TableRow>
           <TableCell component="th" scope="row" style={{ fontWeight: "bold" }}>
@@ -85,6 +86,10 @@ console.log(resolvedData);
             ) : inv.status === "2" ? (
               <span className="text-red-800 p-2 bg-red-100 rounded-sm text-xs">
                 Canceled
+              </span>
+            ) : inv.status === "3" ? (
+              <span className="text-red-800 p-2 bg-red-100 rounded-sm text-xs">
+                Expired
               </span>
             ) : (
               <span className="text-grren-800 p-2 bg-green-100 rounded-sm text-xs">

@@ -24,14 +24,14 @@ const PlanDetails = ({
     //if (!data) return;
     return (
       <div className="">
-        <p className="font-bold text-sm mb-2 ml-1">Pick an investment plan</p>
+        <p className="font-bold text-sm mb-2 ml-1">Pick a duration</p>
         <select
            
           {...input}
           className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
         >
           <option value="" disabled>
-            --- select a plan --
+            --- select a duration --
           </option>
           {data.duration.map((_) => {
             return (

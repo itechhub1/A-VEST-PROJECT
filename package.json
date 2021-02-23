@@ -6,7 +6,12 @@
   "scripts": {
     "start:server": "ts-node-dev --poll src/index.ts",
     "start:client": "npm start --prefix client",
-    "start": "concurrently npm:start:*"
+    "start:dev": "concurrently npm:start:* ",
+    "start": "node build/index.js",
+    "clean": "del-cli ./build/*",
+    "build": "npm run clean && tsc",
+    "copy-files": "cp -R ./src/views/ ./build/ && cp -R ./client  ./build/",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build  && npm install --prefix client && npm run build --prefix client && npm run copy-files "
   },
   "keywords": [],
   "author": "",

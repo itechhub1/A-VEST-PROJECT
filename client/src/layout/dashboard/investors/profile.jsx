@@ -25,7 +25,7 @@ const renderOptionFeild = ({ input, meta }) => {
           --- select means of identification --
         </option>
         {identification.map((_) => (
-          <option value={_}>{_}</option>
+          <option key={_} value={_}>{_}</option>
         ))}
       </select>
 
@@ -49,12 +49,12 @@ const Profile = (props) => {
     initialValues,
     currentuser,
   } = props;
-  console.log(props);
+  
 
   const [completed, setcompleted] = useState(false);
 
   const submit = (formvalues) => {
-    console.log(formvalues);
+  
     AddProfile(formvalues);
   };
 
@@ -63,8 +63,11 @@ const Profile = (props) => {
   }, []);
 
   const onChange = (e) => {
+    /* check for file sizes here if neccessary */
+    if (e.target.files[0].size > 2097152) {
+      return alert("File is too big!");
+    }
     setcompleted(true);
-    console.log(e.target.files);
     setUploadFiles(e.target.files);
   };
 
@@ -74,7 +77,7 @@ const Profile = (props) => {
         Profile
       </h1>
       <h1 className=" text-xl md:text-2xl text-black mt-2 dark:text-gray-200">
-      Complete your Profile
+        Complete your Profile
       </h1>
 
       <div className=" max-w-xl bg-white shadow rounded-lg dark:bg-gray-800 dark:text-gray-200 mt-2 p-2 md:p-4 border dark:border-gray-200">
@@ -152,6 +155,7 @@ const Profile = (props) => {
                   <input
                     type="file"
                     className="hidden"
+                    accept="application/pdf"
                     onClick={(e) =>
                       completed || initialValues !== null
                         ? e.preventDefault()

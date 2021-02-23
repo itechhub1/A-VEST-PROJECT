@@ -85,7 +85,6 @@ const Login = ({ handleSubmit, signInUser }) => {
 
 const validate = ({ email, password }) => {
   const error = {};
-  console.log(error);
   if (!email) {
     error.email = "email Feild Is Empty.";
   }
