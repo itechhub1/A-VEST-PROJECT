@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Aimartvest - Documentation</title>
+</head>
+<body class=" max-w-6xl p-4 text-white bg-white ">
+   <div class="w-full bg-blue-800 shadow-md flex justify-center items-center">
+       <div class="w-full flex flex-col justify-center items-center">
+        <h1 class=" font-bold text-3xl mb-4">Aimart Avest Server Docs </h1>
+        <div class="bg-100 p-4">
+            This Documentation attached to this software comprises of Two sections  <span class="font-bold">User</span> & <span class="font-bold">Admin</span>. </br>
+            with assigned Row of (User & Admin).</br>
+            <li class="my-4 "><span class=" font-mono text-black bg-gray-100 p-1  border border-blue-800">seeeder.ts</span> Contains the logic to seed the admin by default to database</li>
+            <li class="my-4 "><span class=" font-mono text-black bg-gray-100 p-1  border border-blue-800">root__route.ts</span> Contains all the routes</li>
+            <li class="my-4 "><span class=" font-mono text-black bg-gray-100 p-1  border border-blue-800">sheduler.ts</span> Logic where it monitors investments e.g expires the investments </li>
+            <li class="my-4 "><span class=" font-mono text-black bg-gray-100 p-1  border border-blue-800">index.ts</span> Entering point to the appication</li>
+        </div>
+           <div class="border border-white p-2 my-4 text-gray-800">
+               <h1 class="text-white">Authentication</h1>
+            <div class="bg-blue-100 p-4 mb-4">
+                <h1 class="text-xl font-semibold">SignIn- <span class="text-xl font-light">api/user/signin</span></h1>
+                <p>It returns the role for that particular user e.g(User)</p>
+              </div>
+   
+              <div class="bg-blue-100 p-4 mb-4">
+               <h1 class="text-xl font-semibold">Register- <span class="text-xl font-light">api/user/signin</span></h1>
+               <p>It accepts user credentials {firstname,lastname,email,password} returns a message to verify the email. </p>
+             </div>
+   
+   
+             <div class="bg-blue-100 p-4 mb-4">
+               <h1 class="text-xl font-semibold  ">Logout- <span class="text-xl font-light">api/user/signin</span></h1>
+               <p>It returns a session null</p>
+             </div>
+   
+             <div class="bg-blue-100 p-4 mb-4">
+               <h1 class="text-xl font-semibold">email verification- <span class="text-xl font-light">api/user/signin</span></h1>
+               <p>It verify the identity and return a session cookie</p>
+             </div>
+   
+             <div class="bg-blue-100 p-4 mb-4">
+               <h1 class="text-xl font-semibold">Update password- <span class="text-xl font-light">api/user/signin</span></h1>
+               <p>It accept input credentials verify and make changes</p>
+             </div>
+   
+             <div class="bg-blue-100 p-4 mb-4">
+               <h1 class="text-xl font-semibold">current user- <span class="text-xl font-light">api/user/signin</span></h1>
+               <p>It returns the current logged in user</p>
+             </div>
+              
+           </div>
+<!-- profile -->
+           <div class="border border-white p-2 my-4 text-gray-800">
+            <h1  class="text-white">Profile</h1>
+         <div class="bg-blue-100 p-4 mb-4">
+             <h1 class="text-xl font-semibold">New- <span class="text-xl font-light">api/user/signin</span></h1>
+             <p>It accept user profile detail values and update the particular user. it returns success message</p>
+           </div>
+
+           
+
+
+          <div class="bg-blue-100 p-4 mb-4">
+            <h1 class="text-xl font-semibold">view- <span class="text-xl font-light">api/user/signin</span></h1>
+            <p>It returns the  thr profile of a user</p>
+          </div>
+
+          <div class="bg-blue-100 p-4 mb-4">
+            <h1 class="text-xl font-semibold">update- <span class="text-xl font-light">api/user/signin</span></h1>
+            <p>it update user profile and return success message</p>
+          </div>
+
+          <div class="bg-blue-100 p-4 mb-4">
+            <h1 class="text-xl font-semibold">upload- <span class="text-xl font-light">api/user/signin</span></h1>
+            <p>it get signed url to make upload to AWS</p>
+          </div>
+
+           
+        </div>
+
+
+           <div class="border border-white p-2 my-4 text-gray-800">
+            <h1  class="text-white">Investments</h1>
+         <div class="bg-blue-100 p-4 mb-4">
+             <h1 class="text-xl font-semibold">New- <span class="text-xl font-light">api/user/signin</span></h1>
+             <p>It accept  investments data saved into DB and return success message</p>
+           </div>
+
+           <div class="bg-blue-100 p-4 mb-4">
+            <h1 class="text-xl font-semibold">Index- <span class="text-xl font-light">api/user/signin</span></h1>
+            <p>It returns the role for that particular user e.g(User)</p>
+          </div>
+
+
+          <div class="bg-blue-100 p-4 mb-4">
+            <h1 class="text-xl font-semibold">view- <span class="text-xl font-light">api/user/signin</span></h1>
+            <p>It returns the profile for a user</p>
+          </div>
+
+          <div class="bg-blue-100 p-4 mb-4">
+            <h1 class="text-xl font-semibold">delete- <span class="text-xl font-light">api/user/signin</span></h1>
+            <p>It returns the role for that particular user e.g(User)</p>
+          </div>
+
+           
+        </div>
+        <div class="border border-white p-2 my-4 text-gray-800">
+            <h1  class="text-white">Paystack</h1>
+         <div class="bg-blue-100 p-4 mb-4">
+             <h1 class="text-xl font-semibold">New- <span class="text-xl font-light">api/user/signin</span></h1>
+             <p>It returns the role for that particular user e.g(User)</p>
+           </div>
+
+          
+
+           
+        </div>
+
+       
+          
+       </div>
+         
+          
+    
+      
+    
+   </div>
+</body>
+</html>
