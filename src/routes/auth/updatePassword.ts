@@ -13,7 +13,7 @@ import { Role } from "../../util";
 const router = express.Router();
 
 router.put(
-  "/api/user/change-login",
+  "/api/user/updatePassword",
   currentUser,
   requireAuth,
   [

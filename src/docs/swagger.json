@@ -1,0 +1,505 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Aimart website documentations",
+    "description": "This is a sample server side aimart docs",
+    "termsOfService": "terms",
+    "contact": {
+      "name": "Tosin Owoeye",
+      "url": "http://tohshine.me",
+      "email": "tohshine@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  },
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Onboarding new applicants eg login, register and logout"
+    },
+    {
+      "name": "profile",
+      "description": "user complete profile before starting investment"
+    },
+    {
+      "name": "investment",
+      "description": "user create, cancel, update its investment"
+    },
+    {
+      "name": "administrator",
+      "description": "where account monitoring and acknowledgement starts"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://faa0de15275c.ngrok.io/api",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/user/new": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Logs in and returns the authentication  cookie",
+        "requestBody": {
+          "required": true,
+          "description": "A JSON object containing the login and password.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "registration successful "
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Logs in and returns the authentication  cookie",
+        "requestBody": {
+          "required": true,
+          "description": "A JSON object containing the login and password.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Contains the sessioncookie name `express:sess`. pass the cookie into subsequent req\n",
+                "schema": {
+                  "type": "string",
+                  "example": "express:sess=abcde12345; Path=/; HttpOnly"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/currentuser": {
+      "get": {
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "auth"
+        ],
+        "summary": "Account login",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "return object of a user"
+          }
+        }
+      }
+    },
+    "/user/updatePassword": {
+      "put": {
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "auth"
+        ],
+        "summary": "update password",
+        "requestBody": {
+          "required": true,
+          "description": "A JSON object containing update password.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePassword"
+              }
+            }
+          }
+        },
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Account logout",
+        "description": "Account logout and cookie session will be deleted",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/profile": {
+      "post": {
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "summary": "Profile creation",
+        "requestBody": {
+          "required": true,
+          "description": "A JSON object containing update password.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Profile"
+              }
+            }
+          }
+        },
+        "description": "user create user profile",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "summary": "Get profile",
+        "description": "Get user single profile",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/upload": {
+      "get": {
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "profile"
+        ],
+        "summary": "Get presigned url from AWS",
+        "description": "This will fetch a presigined to process image upload to aws",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/investment/new": {
+      "post": {
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "investment"
+        ],
+        "summary": "creating new investment",
+        "requestBody": {
+          "required": true,
+          "description": "user with updated profile can create a new investment.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Investment"
+              }
+            }
+          }
+        },
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/investment": {
+      "get": {
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "investment"
+        ],
+        "summary": "Get all created investment",
+        "description": "It returns list of investment created by a particular user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/investment/delete/{id}": {
+      "delete": {
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "investment"
+        ],
+        "summary": "Delete a particular investment",
+        "description": "It cancel an investment for a particular user ",
+        "operationId": "deleteIvestmentById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/investment/{id}": {
+      "get": {
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "investment"
+        ],
+        "summary": "View details of an investment",
+        "description": "user check details ofan investment",
+        "operationId": "getInvestmentById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+             
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "express:sess"
+      }
+    },
+    "schemas": {
+      "Register": {
+        "properties": {
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 12
+          }
+        }
+      },
+      "Profile": {
+        "properties": {
+          "relationship": {
+            "description": "your relation eg single",
+            "type": "string"
+          },
+          "dob": {
+            "description": "Date of birth",
+            "type": "string"
+          },
+          "identity": {
+            "description": "select means of identification",
+            "type": "string"
+          },
+          "phonenumer": {
+            "description": "Input phone number",
+            "type": "string"
+          },
+          "attachment": {
+            "description": "file to upload",
+            "type": "string"
+          }
+        }
+      },
+      "Login": {
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdatePassword": {
+        "properties": {
+          "oldPassword": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "Investment": {
+        "properties": {
+          "plan": {
+            "type": "string"
+          },
+          "percentage": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "roi": {
+            "type": "string"
+          },
+          "fullname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phonenumber": {
+            "type": "string"
+          },
+          "employerCompany": {
+            "type": "string"
+          },
+          "occupationDesc": {
+            "type": "string"
+          },
+          "nextOfKin": {
+            "type": "string"
+          },
+          "addressOfKin": {
+            "type": "string"
+          },
+          "phonenumberOfKin": {
+            "type": "string"
+          },
+          "relationshipOfKin": {
+            "type": "string"
+          },
+          "agreement": {
+            "type": "boolean"
+          },
+          "paymentPlan": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "amount": 100000,
+          "fullname": "Jessica Right",
+          "email": "test@test.com",
+          "plan": "Gold Basic",
+          "percentage": "10% 6months",
+          "phonenumber": "8060516515",
+          "identity": "National ID",
+          "employerCompany": "test comp",
+          "occupationDesc": "tester",
+          "nameOfKin": "doe",
+          "addressOfKin": "strainge street",
+          "phonenumberOfKin": "0923474",
+          "relationshipOfKin": "married",
+          "agreement": true,
+          "paymentPlan": "paystack",
+          "roi": "₦1,100,000"
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ]
+}

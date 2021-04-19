@@ -42,11 +42,11 @@ paymentPlan(pin):"paystack" */
 plan(pin):"Gold Basic"
 percentage(pin):"10% 6months"
 amount(pin):"1000000"
-roi(pin):"₦1,100,000"
+roi: "₦1,100,000"
 fullname(pin):"Owoeye Oluwatosin Ajibola"
 email(pin):"tohshine@gmail.com"
 phonenumber(pin):"8060516515"
-identity(pin):"National ID"
+identity: "National ID"
 employerCompany(pin):"eee"
 occupationDesc(pin):"eeee"
 nameOfKin(pin):"akin"
@@ -96,10 +96,8 @@ router.post(
       amount,
       roi,
       fullname,
-     
       email,
       phonenumber,
-  
       employerCompany,
       occupationDesc,
       nextOfKin,

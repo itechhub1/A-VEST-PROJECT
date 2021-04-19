@@ -22,6 +22,7 @@ router.get(
     const { extension } = req.body;
     const key = `${req.currentUser?.id}/${uuidV4()}.pdf`;
     S3.getSignedUrl(
+      
       "putObject",
       {
         Bucket: "aimartavest",

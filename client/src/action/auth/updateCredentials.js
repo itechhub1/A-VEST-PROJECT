@@ -5,7 +5,7 @@ import { serverMessage } from "../notifications";
 export const updateCredentials = (userInput) => async (dispatch) => {
 
     try {
-        const { status, data } = await axios.put("/api/user/change-login", userInput);
+        const { status, data } = await axios.put("/api/user/updatePassword", userInput);
         dispatch(serverMessage(status, data))
 
     } catch (error) {

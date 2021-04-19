@@ -22,33 +22,39 @@
            <div class="border border-white p-2 my-4 text-gray-800">
                <h1 class="text-white">Authentication</h1>
             <div class="bg-blue-100 p-4 mb-4">
-                <h1 class="text-xl font-semibold">SignIn- <span class="text-xl font-light">api/user/signin</span></h1>
+                <h1 class="text-xl font-semibold">SignIn- <span class="text-xl font-light">/api/user/login</span></h1>
+                <h2>POST</h2>
                 <p>It returns the role for that particular user e.g(User)</p>
               </div>
    
               <div class="bg-blue-100 p-4 mb-4">
-               <h1 class="text-xl font-semibold">Register- <span class="text-xl font-light">api/user/signin</span></h1>
+               <h1 class="text-xl font-semibold">Register- <span class="text-xl font-light">/api/user/new</span></h1>
+               <h2>POST</h2>
                <p>It accepts user credentials {firstname,lastname,email,password} returns a message to verify the email. </p>
              </div>
    
    
              <div class="bg-blue-100 p-4 mb-4">
-               <h1 class="text-xl font-semibold  ">Logout- <span class="text-xl font-light">api/user/signin</span></h1>
+               <h1 class="text-xl font-semibold  ">Logout- <span class="text-xl font-light">/api/user/logout</span></h1>
+               <h2>GET</h2>
                <p>It returns a session null</p>
              </div>
    
              <div class="bg-blue-100 p-4 mb-4">
-               <h1 class="text-xl font-semibold">email verification- <span class="text-xl font-light">api/user/signin</span></h1>
+               <h1 class="text-xl font-semibold">email verification- <span class="text-xl font-light">/api/user/verifyemail/:id</span></h1>
+               <h2>GET</h2>
                <p>It verify the identity and return a session cookie</p>
              </div>
    
              <div class="bg-blue-100 p-4 mb-4">
-               <h1 class="text-xl font-semibold">Update password- <span class="text-xl font-light">api/user/signin</span></h1>
+               <h1 class="text-xl font-semibold">Update password- <span class="text-xl font-light"> /api/user/change-login</span></h1>
+               <h2>PUT</h2>
                <p>It accept input credentials verify and make changes</p>
              </div>
    
              <div class="bg-blue-100 p-4 mb-4">
-               <h1 class="text-xl font-semibold">current user- <span class="text-xl font-light">api/user/signin</span></h1>
+               <h1 class="text-xl font-semibold">current user- <span class="text-xl font-light">/api/user/currentuser</span></h1>
+               <h2>GET</h2>
                <p>It returns the current logged in user</p>
              </div>
               
@@ -57,7 +63,8 @@
            <div class="border border-white p-2 my-4 text-gray-800">
             <h1  class="text-white">Profile</h1>
          <div class="bg-blue-100 p-4 mb-4">
-             <h1 class="text-xl font-semibold">New- <span class="text-xl font-light">api/user/signin</span></h1>
+             <h1 class="text-xl font-semibold">New- <span class="text-xl font-light">/api/user/profile</span></h1>
+            <h2>POST</h2>
              <p>It accept user profile detail values and update the particular user. it returns success message</p>
            </div>
 
@@ -65,17 +72,20 @@
 
 
           <div class="bg-blue-100 p-4 mb-4">
-            <h1 class="text-xl font-semibold">view- <span class="text-xl font-light">api/user/signin</span></h1>
+            <h1 class="text-xl font-semibold">view- <span class="text-xl font-light">api/user/profile</span></h1>
+            <h2>GET</h2>
             <p>It returns the  thr profile of a user</p>
           </div>
 
           <div class="bg-blue-100 p-4 mb-4">
-            <h1 class="text-xl font-semibold">update- <span class="text-xl font-light">api/user/signin</span></h1>
+            <h1 class="text-xl font-semibold">update- <span class="text-xl font-light">api/user/profile</span></h1>
+           <h2>PUT</h2>
             <p>it update user profile and return success message</p>
           </div>
 
           <div class="bg-blue-100 p-4 mb-4">
-            <h1 class="text-xl font-semibold">upload- <span class="text-xl font-light">api/user/signin</span></h1>
+            <h1 class="text-xl font-semibold">upload- <span class="text-xl font-light">api/upload</span></h1>
+           <h2>GET</h2>
             <p>it get signed url to make upload to AWS</p>
           </div>
 
@@ -86,41 +96,70 @@
            <div class="border border-white p-2 my-4 text-gray-800">
             <h1  class="text-white">Investments</h1>
          <div class="bg-blue-100 p-4 mb-4">
-             <h1 class="text-xl font-semibold">New- <span class="text-xl font-light">api/user/signin</span></h1>
-             <p>It accept  investments data saved into DB and return success message</p>
+  
+  <h1 class="text-xl font-semibold">New-  <span class="text-xl font-light"> /api/investment/new</span></h1>
+  <h2>POST</h2>           
+  <p>It accept  investments data saved into DB and return success message</p>
            </div>
 
            <div class="bg-blue-100 p-4 mb-4">
-            <h1 class="text-xl font-semibold">Index- <span class="text-xl font-light">api/user/signin</span></h1>
+            <h1 class="text-xl font-semibold">Index- <span class="text-xl font-light">/api/investment/</span></h1>
+            <h2>GET</h2>
             <p>It returns the role for that particular user e.g(User)</p>
           </div>
 
 
           <div class="bg-blue-100 p-4 mb-4">
-            <h1 class="text-xl font-semibold">view- <span class="text-xl font-light">api/user/signin</span></h1>
-            <p>It returns the profile for a user</p>
+            <h1 class="text-xl font-semibold">view- <span class="text-xl font-light">/api/investment/:id</span></h1>
+            <h2>GET</h2>
+            <p>It returns a single view to an investment</p>
           </div>
 
           <div class="bg-blue-100 p-4 mb-4">
-            <h1 class="text-xl font-semibold">delete- <span class="text-xl font-light">api/user/signin</span></h1>
-            <p>It returns the role for that particular user e.g(User)</p>
+            <h1 class="text-xl font-semibold">delete- <span class="text-xl font-light">/api/investment/delete/:id</span></h1>
+            <h2>Delete</h2>
+            <p>It returns a message of investment canceled</p>
           </div>
 
            
         </div>
+
+        <!-- Paystak -->
         <div class="border border-white p-2 my-4 text-gray-800">
             <h1  class="text-white">Paystack</h1>
          <div class="bg-blue-100 p-4 mb-4">
-             <h1 class="text-xl font-semibold">New- <span class="text-xl font-light">api/user/signin</span></h1>
-             <p>It returns the role for that particular user e.g(User)</p>
+             <h1 class="text-xl font-semibold">New- <span class="text-xl font-light">/api/user/paystack</span></h1>
+            <h2>PUT</h2>
+             <p>It returns return a success message forpayment successfull</p>
            </div>
 
           
 
            
         </div>
+      <hr class="bg-white">
+      <br>
+      <h1  class="text-white">Admin</h1>
+        <div class="border border-white p-2 my-4 text-gray-800">
+        
+          <h1  class="text-white">Login</h1>
+       <div class="bg-blue-100 p-4 mb-4">
+           <h1 class="text-xl font-semibold">Login- <span class="text-xl font-light">/api/user/paystack</span></h1>
+          <h2>POST</h2>
+           <p>It got redirected to input 2FA key</p>
+         </div>
 
-       
+         <div class="bg-blue-100 p-4 mb-4">
+          <h1 class="text-xl font-semibold">2FA- <span class="text-xl font-light">/api/user/paystack</span></h1>
+         <h2>PUT</h2>
+          <p>it return a session </p>
+        </div>
+
+        
+        
+
+         
+      </div>
           
        </div>
          
