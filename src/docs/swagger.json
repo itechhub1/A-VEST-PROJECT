@@ -35,8 +35,8 @@
   ],
   "servers": [
     {
-      "url": "https://faa0de15275c.ngrok.io/api",
-      "description": ""
+      "url": "https://aimartavest.herokuapp.com/api",
+      "description": "Test server Aimart documentations"
     }
   ],
   "paths": {
